@@ -543,81 +543,81 @@ Baseline зафіксовано комітом `c860d9580693acd52b92a04104866939
 
 | ID вимоги | Предметні D-тікети (чернетка) | Реальні GitHub Issues | Реальні Test / Code / Documentation |
 | --- | --- | --- | --- |
-| REQ-F-001 | D-12, D-13 | — | — |
-| REQ-F-002 | D-12, D-13 | — | — |
-| REQ-F-003 | D-12, D-13 | — | — |
-| REQ-F-004 | D-22, D-23 | — | — |
-| REQ-F-005 | D-07, D-14, D-15 | — | — |
-| REQ-F-006 | D-07, D-14, D-15 | — | — |
-| REQ-F-007 | D-07, D-14, D-15 | — | — |
-| REQ-F-008 | D-16, D-17 | — | — |
-| REQ-F-009 | D-16, D-17 | — | — |
-| REQ-F-010 | D-07, D-16, D-17 | — | — |
-| REQ-F-011 | D-26, D-27 | — | — |
-| REQ-F-012 | D-05, D-26, D-27 | — | — |
-| REQ-F-013 | D-26, D-27 | — | — |
-| REQ-F-014 | D-26, D-27 | — | — |
-| REQ-F-015 | D-26, D-27 | — | — |
-| REQ-F-016 | D-26, D-27 | — | — |
-| REQ-F-017 | D-22, D-23 | — | — |
-| REQ-F-018 | D-03, D-22, D-23 | — | — |
-| REQ-F-019 | D-22, D-23 | — | — |
-| REQ-F-020 | D-03, D-22, D-23 | — | — |
-| REQ-F-021 | D-02, D-22, D-23 | — | — |
-| REQ-F-022 | D-22, D-23 | — | — |
-| REQ-F-023 | D-24, D-25 | — | — |
-| REQ-F-024 | D-24, D-25 | — | — |
-| REQ-F-025 | D-24, D-25 | — | — |
-| REQ-F-026 | D-24, D-25 | — | — |
-| REQ-F-027 | D-24, D-25 | — | — |
-| REQ-F-028 | D-24, D-25 | — | — |
-| REQ-F-029 | D-24, D-25 | — | — |
-| REQ-F-030 | D-28, D-29 | — | — |
-| REQ-F-031 | D-28, D-29 | — | — |
-| REQ-F-032 | D-06, D-28, D-29 | — | — |
-| REQ-F-033 | D-28, D-29 | — | — |
-| REQ-F-034 | D-30, D-31 | — | — |
-| REQ-F-035 | D-30, D-31 | — | — |
-| REQ-F-036 | D-30, D-31 | — | — |
-| REQ-F-037 | D-30, D-31 | — | — |
-| REQ-F-038 | D-30, D-31 | — | — |
-| REQ-F-039 | D-05, D-06, D-32, D-33 | — | — |
-| REQ-F-040 | D-05, D-32, D-33 | — | — |
-| REQ-F-041 | D-06, D-30, D-31 | — | — |
-| REQ-F-042 | D-32, D-33 | — | — |
-| REQ-F-043 | D-05, D-32, D-33 | — | — |
-| REQ-F-044 | D-32, D-33 | — | — |
-| REQ-F-045 | D-18, D-19 | — | — |
-| REQ-F-046 | D-18, D-19 | — | — |
-| REQ-F-047 | D-18, D-19 | — | — |
-| REQ-F-048 | D-20, D-21 | — | — |
-| REQ-F-049 | D-20, D-21 | — | — |
-| REQ-F-050 | D-34, D-35 | — | — |
-| REQ-F-051 | D-34, D-35 | — | — |
-| REQ-F-052 | D-18, D-19 | — | — |
-| REQ-F-053 | D-06, D-34, D-35 | — | — |
-| REQ-F-054 | D-06, D-34, D-35 | — | — |
-| REQ-F-055 | D-06, D-34, D-35 | — | — |
-| REQ-F-056 | D-07, D-36, D-37 | — | — |
-| REQ-F-057 | D-07, D-36, D-37 | — | — |
-| REQ-F-058 | D-07, D-36, D-37 | — | — |
-| REQ-F-059 | D-04, D-07, D-38, D-39 | — | — |
-| REQ-F-060 | D-04, D-38, D-39 | — | — |
-| REQ-F-061 | D-38, D-39 | — | — |
-| REQ-F-062 | D-38, D-39 | — | — |
-| REQ-F-063 | D-04, D-38, D-39 | — | — |
-| REQ-F-064 | D-38, D-39 | — | — |
-| REQ-NF-001 | D-08 | — | — |
-| REQ-NF-002 | D-08 | — | — |
-| REQ-NF-003 | D-08 | — | — |
-| REQ-NF-004 | D-14, D-15 | — | — |
-| REQ-NF-005 | D-09 | — | — |
-| REQ-NF-006 | D-09 | — | — |
-| REQ-NF-007 | D-10 | — | — |
-| REQ-NF-008 | D-10 | — | — |
-| REQ-NF-009 | D-10 | — | — |
-| REQ-NF-010 | D-10 | — | — |
-| REQ-NF-011 | D-08 | — | — |
+| REQ-F-001 | D-12, D-13 | [#13](https://github.com/bebroidrur/beauty-salon-booking-system/issues/13), [#14](https://github.com/bebroidrur/beauty-salon-booking-system/issues/14) | — |
+| REQ-F-002 | D-12, D-13 | [#13](https://github.com/bebroidrur/beauty-salon-booking-system/issues/13), [#14](https://github.com/bebroidrur/beauty-salon-booking-system/issues/14) | — |
+| REQ-F-003 | D-12, D-13 | [#13](https://github.com/bebroidrur/beauty-salon-booking-system/issues/13), [#14](https://github.com/bebroidrur/beauty-salon-booking-system/issues/14) | — |
+| REQ-F-004 | D-22, D-23 | [#23](https://github.com/bebroidrur/beauty-salon-booking-system/issues/23), [#24](https://github.com/bebroidrur/beauty-salon-booking-system/issues/24) | — |
+| REQ-F-005 | D-07, D-14, D-15 | [#8](https://github.com/bebroidrur/beauty-salon-booking-system/issues/8), [#15](https://github.com/bebroidrur/beauty-salon-booking-system/issues/15), [#16](https://github.com/bebroidrur/beauty-salon-booking-system/issues/16) | — |
+| REQ-F-006 | D-07, D-14, D-15 | [#8](https://github.com/bebroidrur/beauty-salon-booking-system/issues/8), [#15](https://github.com/bebroidrur/beauty-salon-booking-system/issues/15), [#16](https://github.com/bebroidrur/beauty-salon-booking-system/issues/16) | — |
+| REQ-F-007 | D-07, D-14, D-15 | [#8](https://github.com/bebroidrur/beauty-salon-booking-system/issues/8), [#15](https://github.com/bebroidrur/beauty-salon-booking-system/issues/15), [#16](https://github.com/bebroidrur/beauty-salon-booking-system/issues/16) | — |
+| REQ-F-008 | D-16, D-17 | [#17](https://github.com/bebroidrur/beauty-salon-booking-system/issues/17), [#18](https://github.com/bebroidrur/beauty-salon-booking-system/issues/18) | — |
+| REQ-F-009 | D-16, D-17 | [#17](https://github.com/bebroidrur/beauty-salon-booking-system/issues/17), [#18](https://github.com/bebroidrur/beauty-salon-booking-system/issues/18) | — |
+| REQ-F-010 | D-07, D-16, D-17 | [#8](https://github.com/bebroidrur/beauty-salon-booking-system/issues/8), [#17](https://github.com/bebroidrur/beauty-salon-booking-system/issues/17), [#18](https://github.com/bebroidrur/beauty-salon-booking-system/issues/18) | — |
+| REQ-F-011 | D-26, D-27 | [#27](https://github.com/bebroidrur/beauty-salon-booking-system/issues/27), [#28](https://github.com/bebroidrur/beauty-salon-booking-system/issues/28) | — |
+| REQ-F-012 | D-05, D-26, D-27 | [#6](https://github.com/bebroidrur/beauty-salon-booking-system/issues/6), [#27](https://github.com/bebroidrur/beauty-salon-booking-system/issues/27), [#28](https://github.com/bebroidrur/beauty-salon-booking-system/issues/28) | — |
+| REQ-F-013 | D-26, D-27 | [#27](https://github.com/bebroidrur/beauty-salon-booking-system/issues/27), [#28](https://github.com/bebroidrur/beauty-salon-booking-system/issues/28) | — |
+| REQ-F-014 | D-26, D-27 | [#27](https://github.com/bebroidrur/beauty-salon-booking-system/issues/27), [#28](https://github.com/bebroidrur/beauty-salon-booking-system/issues/28) | — |
+| REQ-F-015 | D-26, D-27 | [#27](https://github.com/bebroidrur/beauty-salon-booking-system/issues/27), [#28](https://github.com/bebroidrur/beauty-salon-booking-system/issues/28) | — |
+| REQ-F-016 | D-26, D-27 | [#27](https://github.com/bebroidrur/beauty-salon-booking-system/issues/27), [#28](https://github.com/bebroidrur/beauty-salon-booking-system/issues/28) | — |
+| REQ-F-017 | D-22, D-23 | [#23](https://github.com/bebroidrur/beauty-salon-booking-system/issues/23), [#24](https://github.com/bebroidrur/beauty-salon-booking-system/issues/24) | — |
+| REQ-F-018 | D-03, D-22, D-23 | [#4](https://github.com/bebroidrur/beauty-salon-booking-system/issues/4), [#23](https://github.com/bebroidrur/beauty-salon-booking-system/issues/23), [#24](https://github.com/bebroidrur/beauty-salon-booking-system/issues/24) | — |
+| REQ-F-019 | D-22, D-23 | [#23](https://github.com/bebroidrur/beauty-salon-booking-system/issues/23), [#24](https://github.com/bebroidrur/beauty-salon-booking-system/issues/24) | — |
+| REQ-F-020 | D-03, D-22, D-23 | [#4](https://github.com/bebroidrur/beauty-salon-booking-system/issues/4), [#23](https://github.com/bebroidrur/beauty-salon-booking-system/issues/23), [#24](https://github.com/bebroidrur/beauty-salon-booking-system/issues/24) | — |
+| REQ-F-021 | D-02, D-22, D-23 | [#3](https://github.com/bebroidrur/beauty-salon-booking-system/issues/3), [#23](https://github.com/bebroidrur/beauty-salon-booking-system/issues/23), [#24](https://github.com/bebroidrur/beauty-salon-booking-system/issues/24) | — |
+| REQ-F-022 | D-22, D-23 | [#23](https://github.com/bebroidrur/beauty-salon-booking-system/issues/23), [#24](https://github.com/bebroidrur/beauty-salon-booking-system/issues/24) | — |
+| REQ-F-023 | D-24, D-25 | [#25](https://github.com/bebroidrur/beauty-salon-booking-system/issues/25), [#26](https://github.com/bebroidrur/beauty-salon-booking-system/issues/26) | — |
+| REQ-F-024 | D-24, D-25 | [#25](https://github.com/bebroidrur/beauty-salon-booking-system/issues/25), [#26](https://github.com/bebroidrur/beauty-salon-booking-system/issues/26) | — |
+| REQ-F-025 | D-24, D-25 | [#25](https://github.com/bebroidrur/beauty-salon-booking-system/issues/25), [#26](https://github.com/bebroidrur/beauty-salon-booking-system/issues/26) | — |
+| REQ-F-026 | D-24, D-25 | [#25](https://github.com/bebroidrur/beauty-salon-booking-system/issues/25), [#26](https://github.com/bebroidrur/beauty-salon-booking-system/issues/26) | — |
+| REQ-F-027 | D-24, D-25 | [#25](https://github.com/bebroidrur/beauty-salon-booking-system/issues/25), [#26](https://github.com/bebroidrur/beauty-salon-booking-system/issues/26) | — |
+| REQ-F-028 | D-24, D-25 | [#25](https://github.com/bebroidrur/beauty-salon-booking-system/issues/25), [#26](https://github.com/bebroidrur/beauty-salon-booking-system/issues/26) | — |
+| REQ-F-029 | D-24, D-25 | [#25](https://github.com/bebroidrur/beauty-salon-booking-system/issues/25), [#26](https://github.com/bebroidrur/beauty-salon-booking-system/issues/26) | — |
+| REQ-F-030 | D-28, D-29 | [#29](https://github.com/bebroidrur/beauty-salon-booking-system/issues/29), [#30](https://github.com/bebroidrur/beauty-salon-booking-system/issues/30) | — |
+| REQ-F-031 | D-28, D-29 | [#29](https://github.com/bebroidrur/beauty-salon-booking-system/issues/29), [#30](https://github.com/bebroidrur/beauty-salon-booking-system/issues/30) | — |
+| REQ-F-032 | D-06, D-28, D-29 | [#7](https://github.com/bebroidrur/beauty-salon-booking-system/issues/7), [#29](https://github.com/bebroidrur/beauty-salon-booking-system/issues/29), [#30](https://github.com/bebroidrur/beauty-salon-booking-system/issues/30) | — |
+| REQ-F-033 | D-28, D-29 | [#29](https://github.com/bebroidrur/beauty-salon-booking-system/issues/29), [#30](https://github.com/bebroidrur/beauty-salon-booking-system/issues/30) | — |
+| REQ-F-034 | D-30, D-31 | [#31](https://github.com/bebroidrur/beauty-salon-booking-system/issues/31), [#32](https://github.com/bebroidrur/beauty-salon-booking-system/issues/32) | — |
+| REQ-F-035 | D-30, D-31 | [#31](https://github.com/bebroidrur/beauty-salon-booking-system/issues/31), [#32](https://github.com/bebroidrur/beauty-salon-booking-system/issues/32) | — |
+| REQ-F-036 | D-30, D-31 | [#31](https://github.com/bebroidrur/beauty-salon-booking-system/issues/31), [#32](https://github.com/bebroidrur/beauty-salon-booking-system/issues/32) | — |
+| REQ-F-037 | D-30, D-31 | [#31](https://github.com/bebroidrur/beauty-salon-booking-system/issues/31), [#32](https://github.com/bebroidrur/beauty-salon-booking-system/issues/32) | — |
+| REQ-F-038 | D-30, D-31 | [#31](https://github.com/bebroidrur/beauty-salon-booking-system/issues/31), [#32](https://github.com/bebroidrur/beauty-salon-booking-system/issues/32) | — |
+| REQ-F-039 | D-05, D-06, D-32, D-33 | [#6](https://github.com/bebroidrur/beauty-salon-booking-system/issues/6), [#7](https://github.com/bebroidrur/beauty-salon-booking-system/issues/7), [#33](https://github.com/bebroidrur/beauty-salon-booking-system/issues/33), [#34](https://github.com/bebroidrur/beauty-salon-booking-system/issues/34) | — |
+| REQ-F-040 | D-05, D-32, D-33 | [#6](https://github.com/bebroidrur/beauty-salon-booking-system/issues/6), [#33](https://github.com/bebroidrur/beauty-salon-booking-system/issues/33), [#34](https://github.com/bebroidrur/beauty-salon-booking-system/issues/34) | — |
+| REQ-F-041 | D-06, D-30, D-31 | [#7](https://github.com/bebroidrur/beauty-salon-booking-system/issues/7), [#31](https://github.com/bebroidrur/beauty-salon-booking-system/issues/31), [#32](https://github.com/bebroidrur/beauty-salon-booking-system/issues/32) | — |
+| REQ-F-042 | D-32, D-33 | [#33](https://github.com/bebroidrur/beauty-salon-booking-system/issues/33), [#34](https://github.com/bebroidrur/beauty-salon-booking-system/issues/34) | — |
+| REQ-F-043 | D-05, D-32, D-33 | [#6](https://github.com/bebroidrur/beauty-salon-booking-system/issues/6), [#33](https://github.com/bebroidrur/beauty-salon-booking-system/issues/33), [#34](https://github.com/bebroidrur/beauty-salon-booking-system/issues/34) | — |
+| REQ-F-044 | D-32, D-33 | [#33](https://github.com/bebroidrur/beauty-salon-booking-system/issues/33), [#34](https://github.com/bebroidrur/beauty-salon-booking-system/issues/34) | — |
+| REQ-F-045 | D-18, D-19 | [#19](https://github.com/bebroidrur/beauty-salon-booking-system/issues/19), [#20](https://github.com/bebroidrur/beauty-salon-booking-system/issues/20) | — |
+| REQ-F-046 | D-18, D-19 | [#19](https://github.com/bebroidrur/beauty-salon-booking-system/issues/19), [#20](https://github.com/bebroidrur/beauty-salon-booking-system/issues/20) | — |
+| REQ-F-047 | D-18, D-19 | [#19](https://github.com/bebroidrur/beauty-salon-booking-system/issues/19), [#20](https://github.com/bebroidrur/beauty-salon-booking-system/issues/20) | — |
+| REQ-F-048 | D-20, D-21 | [#21](https://github.com/bebroidrur/beauty-salon-booking-system/issues/21), [#22](https://github.com/bebroidrur/beauty-salon-booking-system/issues/22) | — |
+| REQ-F-049 | D-20, D-21 | [#21](https://github.com/bebroidrur/beauty-salon-booking-system/issues/21), [#22](https://github.com/bebroidrur/beauty-salon-booking-system/issues/22) | — |
+| REQ-F-050 | D-34, D-35 | [#35](https://github.com/bebroidrur/beauty-salon-booking-system/issues/35), [#36](https://github.com/bebroidrur/beauty-salon-booking-system/issues/36) | — |
+| REQ-F-051 | D-34, D-35 | [#35](https://github.com/bebroidrur/beauty-salon-booking-system/issues/35), [#36](https://github.com/bebroidrur/beauty-salon-booking-system/issues/36) | — |
+| REQ-F-052 | D-18, D-19 | [#19](https://github.com/bebroidrur/beauty-salon-booking-system/issues/19), [#20](https://github.com/bebroidrur/beauty-salon-booking-system/issues/20) | — |
+| REQ-F-053 | D-06, D-34, D-35 | [#7](https://github.com/bebroidrur/beauty-salon-booking-system/issues/7), [#35](https://github.com/bebroidrur/beauty-salon-booking-system/issues/35), [#36](https://github.com/bebroidrur/beauty-salon-booking-system/issues/36) | — |
+| REQ-F-054 | D-06, D-34, D-35 | [#7](https://github.com/bebroidrur/beauty-salon-booking-system/issues/7), [#35](https://github.com/bebroidrur/beauty-salon-booking-system/issues/35), [#36](https://github.com/bebroidrur/beauty-salon-booking-system/issues/36) | — |
+| REQ-F-055 | D-06, D-34, D-35 | [#7](https://github.com/bebroidrur/beauty-salon-booking-system/issues/7), [#35](https://github.com/bebroidrur/beauty-salon-booking-system/issues/35), [#36](https://github.com/bebroidrur/beauty-salon-booking-system/issues/36) | — |
+| REQ-F-056 | D-07, D-36, D-37 | [#8](https://github.com/bebroidrur/beauty-salon-booking-system/issues/8), [#37](https://github.com/bebroidrur/beauty-salon-booking-system/issues/37), [#38](https://github.com/bebroidrur/beauty-salon-booking-system/issues/38) | — |
+| REQ-F-057 | D-07, D-36, D-37 | [#8](https://github.com/bebroidrur/beauty-salon-booking-system/issues/8), [#37](https://github.com/bebroidrur/beauty-salon-booking-system/issues/37), [#38](https://github.com/bebroidrur/beauty-salon-booking-system/issues/38) | — |
+| REQ-F-058 | D-07, D-36, D-37 | [#8](https://github.com/bebroidrur/beauty-salon-booking-system/issues/8), [#37](https://github.com/bebroidrur/beauty-salon-booking-system/issues/37), [#38](https://github.com/bebroidrur/beauty-salon-booking-system/issues/38) | — |
+| REQ-F-059 | D-04, D-07, D-38, D-39 | [#5](https://github.com/bebroidrur/beauty-salon-booking-system/issues/5), [#8](https://github.com/bebroidrur/beauty-salon-booking-system/issues/8), [#39](https://github.com/bebroidrur/beauty-salon-booking-system/issues/39), [#40](https://github.com/bebroidrur/beauty-salon-booking-system/issues/40) | — |
+| REQ-F-060 | D-04, D-38, D-39 | [#5](https://github.com/bebroidrur/beauty-salon-booking-system/issues/5), [#39](https://github.com/bebroidrur/beauty-salon-booking-system/issues/39), [#40](https://github.com/bebroidrur/beauty-salon-booking-system/issues/40) | — |
+| REQ-F-061 | D-38, D-39 | [#39](https://github.com/bebroidrur/beauty-salon-booking-system/issues/39), [#40](https://github.com/bebroidrur/beauty-salon-booking-system/issues/40) | — |
+| REQ-F-062 | D-38, D-39 | [#39](https://github.com/bebroidrur/beauty-salon-booking-system/issues/39), [#40](https://github.com/bebroidrur/beauty-salon-booking-system/issues/40) | — |
+| REQ-F-063 | D-04, D-38, D-39 | [#5](https://github.com/bebroidrur/beauty-salon-booking-system/issues/5), [#39](https://github.com/bebroidrur/beauty-salon-booking-system/issues/39), [#40](https://github.com/bebroidrur/beauty-salon-booking-system/issues/40) | — |
+| REQ-F-064 | D-38, D-39 | [#39](https://github.com/bebroidrur/beauty-salon-booking-system/issues/39), [#40](https://github.com/bebroidrur/beauty-salon-booking-system/issues/40) | — |
+| REQ-NF-001 | D-08 | [#9](https://github.com/bebroidrur/beauty-salon-booking-system/issues/9) | — |
+| REQ-NF-002 | D-08 | [#9](https://github.com/bebroidrur/beauty-salon-booking-system/issues/9) | — |
+| REQ-NF-003 | D-08 | [#9](https://github.com/bebroidrur/beauty-salon-booking-system/issues/9) | — |
+| REQ-NF-004 | D-14, D-15 | [#15](https://github.com/bebroidrur/beauty-salon-booking-system/issues/15), [#16](https://github.com/bebroidrur/beauty-salon-booking-system/issues/16) | — |
+| REQ-NF-005 | D-09 | [#10](https://github.com/bebroidrur/beauty-salon-booking-system/issues/10) | — |
+| REQ-NF-006 | D-09 | [#10](https://github.com/bebroidrur/beauty-salon-booking-system/issues/10) | — |
+| REQ-NF-007 | D-10 | [#11](https://github.com/bebroidrur/beauty-salon-booking-system/issues/11) | — |
+| REQ-NF-008 | D-10 | [#11](https://github.com/bebroidrur/beauty-salon-booking-system/issues/11) | — |
+| REQ-NF-009 | D-10 | [#11](https://github.com/bebroidrur/beauty-salon-booking-system/issues/11) | — |
+| REQ-NF-010 | D-10 | [#11](https://github.com/bebroidrur/beauty-salon-booking-system/issues/11) | — |
+| REQ-NF-011 | D-08 | [#9](https://github.com/bebroidrur/beauty-salon-booking-system/issues/9) | — |
 
 Загальні процесні тікети D-01, D-11, D-40–D-45 не дублюються в колонці предметних задач; їх обсяг визначено у власних полях ID. «—» означає відсутність фактичного артефакту, а не відсутність запланованої роботи. D-45 ведеться зараз; D-43 стосується майбутньої документації реалізації.
 

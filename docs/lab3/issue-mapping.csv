@@ -1,0 +1,46 @@
+D-ID,GitHub Issue #,GitHub URL,Type,Title
+D-01,2,https://github.com/bebroidrur/beauty-salon-booking-system/issues/2,Specification,Перевірити межі та покриття плану робіт
+D-02,3,https://github.com/bebroidrur/beauty-salon-booking-system/issues/3,Addendum,Уточнити відлік горизонту бронювання
+D-03,4,https://github.com/bebroidrur/beauty-salon-booking-system/issues/4,Addendum,Уточнити сітку початків та найближчий час адміністратора
+D-04,5,https://github.com/bebroidrur/beauty-salon-booking-system/issues/5,Addendum,"Уточнити нагадування після перенесення запису, створеного менш ніж за добу"
+D-05,6,https://github.com/bebroidrur/beauty-salon-booking-system/issues/6,Addendum,Уточнити негативне приймання несумісної пари послуга/майстер при зміні
+D-06,7,https://github.com/bebroidrur/beauty-salon-booking-system/issues/7,Addendum,Уточнити історію при видаленні та зміни записів із деактивованими сутностями
+D-07,8,https://github.com/bebroidrur/beauty-salon-booking-system/issues/8,Specification,Зафіксувати межі деталізації доступу та листів
+D-08,9,https://github.com/bebroidrur/beauty-salon-booking-system/issues/9,Addendum,"Погодити продуктивність, надійність і доступність сервісу"
+D-09,10,https://github.com/bebroidrur/beauty-salon-booking-system/issues/10,Addendum,Погодити конкретні критерії захисту персональних даних
+D-10,11,https://github.com/bebroidrur/beauty-salon-booking-system/issues/11,Addendum,"Погодити адаптивність, браузери та доступність інтерфейсу"
+D-11,12,https://github.com/bebroidrur/beauty-salon-booking-system/issues/12,Gate,Перевірити готовність погоджених пакетів до TDD
+D-12,13,https://github.com/bebroidrur/beauty-salon-booking-system/issues/13,Test,Тести: Публічний каталог і майстри
+D-13,14,https://github.com/bebroidrur/beauty-salon-booking-system/issues/14,Feature,Публічний каталог і майстри
+D-14,15,https://github.com/bebroidrur/beauty-salon-booking-system/issues/15,Test,"Тести: Реєстрація, вхід і захист паролів"
+D-15,16,https://github.com/bebroidrur/beauty-salon-booking-system/issues/16,Feature,"Реєстрація, вхід і захист паролів"
+D-16,17,https://github.com/bebroidrur/beauty-salon-booking-system/issues/17,Test,Тести: Ролі та доступ до власних записів
+D-17,18,https://github.com/bebroidrur/beauty-salon-booking-system/issues/18,Feature,Ролі та доступ до власних записів
+D-18,19,https://github.com/bebroidrur/beauty-salon-booking-system/issues/19,Test,Тести: Керування послугами та майстрами
+D-19,20,https://github.com/bebroidrur/beauty-salon-booking-system/issues/20,Feature,Керування послугами та майстрами
+D-20,21,https://github.com/bebroidrur/beauty-salon-booking-system/issues/21,Test,Тести: Тижневий графік і винятки
+D-21,22,https://github.com/bebroidrur/beauty-salon-booking-system/issues/22,Feature,Тижневий графік і винятки
+D-22,23,https://github.com/bebroidrur/beauty-salon-booking-system/issues/23,Test,Тести: Слоти та календарні обмеження
+D-23,24,https://github.com/bebroidrur/beauty-salon-booking-system/issues/24,Feature,Слоти та календарні обмеження
+D-24,25,https://github.com/bebroidrur/beauty-salon-booking-system/issues/25,Test,Тести: Часові конфлікти та конкурентне збереження
+D-25,26,https://github.com/bebroidrur/beauty-salon-booking-system/issues/26,Feature,Часові конфлікти та конкурентне збереження
+D-26,27,https://github.com/bebroidrur/beauty-salon-booking-system/issues/27,Test,Тести: Створення та фіксація даних запису
+D-27,28,https://github.com/bebroidrur/beauty-salon-booking-system/issues/28,Feature,Створення та фіксація даних запису
+D-28,29,https://github.com/bebroidrur/beauty-salon-booking-system/issues/29,Test,"Тести: Актуальні записи, деталі та історія"
+D-29,30,https://github.com/bebroidrur/beauty-salon-booking-system/issues/30,Feature,"Актуальні записи, деталі та історія"
+D-30,31,https://github.com/bebroidrur/beauty-salon-booking-system/issues/31,Test,Тести: Скасування та заборони редагування
+D-31,32,https://github.com/bebroidrur/beauty-salon-booking-system/issues/32,Feature,Скасування та заборони редагування
+D-32,33,https://github.com/bebroidrur/beauty-salon-booking-system/issues/33,Test,Тести: Адміністративна зміна та перенесення
+D-33,34,https://github.com/bebroidrur/beauty-salon-booking-system/issues/34,Feature,Адміністративна зміна та перенесення
+D-34,35,https://github.com/bebroidrur/beauty-salon-booking-system/issues/35,Test,Тести: Захист графіка та життєвий цикл послуг і майстрів
+D-35,36,https://github.com/bebroidrur/beauty-salon-booking-system/issues/36,Feature,Захист графіка та життєвий цикл послуг і майстрів
+D-36,37,https://github.com/bebroidrur/beauty-salon-booking-system/issues/37,Test,"Тести: Email про створення, зміну й скасування"
+D-37,38,https://github.com/bebroidrur/beauty-salon-booking-system/issues/38,Feature,"Email про створення, зміну й скасування"
+D-38,39,https://github.com/bebroidrur/beauty-salon-booking-system/issues/39,Test,Тести: Нагадування та їх перепланування
+D-39,40,https://github.com/bebroidrur/beauty-salon-booking-system/issues/40,Feature,Нагадування та їх перепланування
+D-40,41,https://github.com/bebroidrur/beauty-salon-booking-system/issues/41,Verification,Верифікувати реалізацію та докази TDD
+D-41,42,https://github.com/bebroidrur/beauty-salon-booking-system/issues/42,Verification,Верифікувати лише погоджені критерії якості
+D-42,43,https://github.com/bebroidrur/beauty-salon-booking-system/issues/43,Validation,Провести людське приймання клієнтських і адміністративних сценаріїв
+D-43,44,https://github.com/bebroidrur/beauty-salon-booking-system/issues/44,Documentation,Документувати реалізацію та остаточно звірити її простежуваність
+D-44,45,https://github.com/bebroidrur/beauty-salon-booking-system/issues/45,Gate,Ухвалити рішення про завершення погодженого SDD-циклу
+D-45,46,https://github.com/bebroidrur/beauty-salon-booking-system/issues/46,Documentation,Заповнити поточну робочу матрицю декомпозиції
