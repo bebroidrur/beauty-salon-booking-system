@@ -1,0 +1,25 @@
+{
+  "explicit_edges": 67,
+  "counts": {
+    "Specification": 2,
+    "Addendum": 8,
+    "Gate": 2,
+    "Test": 14,
+    "Feature": 14,
+    "Verification": 2,
+    "Validation": 1,
+    "Documentation": 1
+  },
+  "evidence_fields": 34
+}
+PASS: 44 tickets, 220 required fields + 44 titles; 75 real REQ; 57 AC; 35 GWT; matrix direct links; pair coverage; draft coverage table; local links; 8 baseline hashes.
+Explicit-ID dependency graph: acyclic. Prose dependencies require semantic review; this does not certify full graph.
+No AC: 19 No GWT: 32
+
+Review date: 2026-10-12
+Report: docs/lab3/decomposition-review.md
+Semantic result: REVISE BEFORE BULK ISSUE CREATION. R-01 blocker; R-02 through R-06 non-blockers.
+Prose dependency cycles are conditional interpretations, not cycles in the explicit-ID graph.
+PASS: report covers all 44 tickets; local report links exist; draft and all spec documents unchanged during review.
+No product tests executed; no GitHub Issues created; no product implementation.
+Reviewed draft SHA-256: c1f59276ec032b25bb3621e3839c76355eeb57fc0f116a90d708173b83f6d3d3

@@ -1,0 +1,14 @@
+Gantt planning checks
+Start: 2026-10-19 09:00 Europe/Kyiv
+Reserved finish: 2026-12-16 13:00
+PASS: 45 unique tickets, each table row has 8 columns.
+PASS: every known dependency precedes dependent task.
+PASS: AI peak 2/2; Human peak 1/1; no resource collisions.
+PASS: 2-hour working slots, Monday-Friday 09:00-17:00.
+PASS: estimates within plan ranges; total active 60.5 days, AI 36.25, Human 24.25.
+PASS: Addendum/Gate wait 1 workday; Validation wait 1.5 workdays; resource queues explicit.
+NF UNKNOWN: D-41 through D-44 are conditional resource reservations, not completed work.
+PASS: SRS/spec, decomposition and implementation plan unchanged.
+No product tests, implementation, acceptance or GitHub actions performed.
+PASS: independent parse of Mermaid timestamp envelopes matches all 45 AI/Human budgets and has no resource overlaps; unique chart IDs and local links checked.
+Mermaid visual rendering was not executed.

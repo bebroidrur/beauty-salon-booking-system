@@ -1,0 +1,15 @@
+Scope document review
+Sources: spec/idea.md; spec/questions.md
+git diff --check exit code: 0
+No whitespace errors.
+Required five sections: PASS
+Manual source comparison:
+- Purpose, roles and public browsing: idea.md agreed and final SKED decisions.
+- Booking, schedules, cancellation and concurrency: questions.md 1–18 and final clarifications.
+- Service data preservation and reminders: questions.md 19–20.
+- All ten explicitly requested exclusions are included; email is In Scope.
+- Additional exclusions only repeat agreed exclusions (payment status, daily breaks, client editing, manual confirmation, other notification channels).
+- Deferred topics are distinguished from explicit exclusions.
+- No new roles, integrations, functions or restrictions introduced.
+- TDD and text execution logs repeat existing process requirements.
+Scope: documentation only; application tests not run.

@@ -1,0 +1,9 @@
+Glossary review
+Sources: spec/idea.md, spec/questions.md, spec/scope.md
+Required terms: PASS
+git diff --check exit code: 0
+No whitespace errors.
+Manual scope review: roles, appointment categories, schedule, availability, service snapshots and email terminology match approved scope.
+Ambiguities clarified: current includes in-progress; historical includes canceled; slot duration differs from start step; reminder is an email notification.
+No new functionality, rules, integrations or implementation schema imposed.
+Documentation-only change; application tests not run.

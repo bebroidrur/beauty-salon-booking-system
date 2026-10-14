@@ -1,0 +1,4 @@
+Check: git diff --check
+Exit code: 0
+No whitespace errors.
+Scope: SKED documentation only; application tests not run.
