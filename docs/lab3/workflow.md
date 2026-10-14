@@ -15,6 +15,7 @@ flowchart LR
     B -->|"AI або Human: результат готовий"| C["In Review"]
     C -->|"Human: приймання"| D["Done"]
     C -->|"Human: доопрацювання"| B
+    C -->|"Human: повторне планування"| A
     B -->|"Human: перепланування"| A
 ```
 
@@ -26,6 +27,7 @@ flowchart LR
 | In Progress → In Review | AI / Human | Результат готовий |
 | In Review → Done | Human | Критерії приймання виконані |
 | In Review → In Progress | Human | Потрібне доопрацювання |
+| In Review → Todo | Human | Повторне планування задачі |
 | In Progress → Todo | Human | Перепланування |
 
 ## Правило контролю
