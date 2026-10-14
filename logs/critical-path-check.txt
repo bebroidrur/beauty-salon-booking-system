@@ -1,0 +1,12 @@
+Critical path planning model verification
+Date: 2026-10-12
+PASS: 45 ticket rows; duration estimates and dependencies read from implementation-plan.md and gantt.md.
+PASS: logic plan 127 slots = 31.75 workdays; Gantt logic 139 slots = 34.75 workdays.
+PASS: fixed-resource DAG 170 slots = 42.5 workdays; reproduces every published A/W/H start.
+PASS: sole logic edge difference is D-40 -> D-41.
+PASS: 18 zero-float tickets in L; 19 in G; 42 tickets contain zero-float resource phases.
+PASS: four equally long resource-critical paths; no resource collisions; peak AI 2, Human 1.
+PASS: independent delay recomputation for every H phase and specified W phases.
+PASS: float table numbers checked, source documents unchanged.
+NF limitations: full completion float and true final critical path cannot be established until missing NF work is specified.
+No product tests, acceptance or GitHub actions performed.

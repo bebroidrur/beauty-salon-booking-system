@@ -1,0 +1,7 @@
+D-45 Markdown matrix formatting check
+PASS: 75 data rows (64 F + 11 NF), each with exactly 4 columns.
+PASS: header and separator each have 4 columns.
+PASS: requirement IDs, row order and all D-ticket associations unchanged.
+PASS: real GitHub Issues and Test/Code/Documentation cells remain em dashes.
+PASS: all spec files unchanged; only missing column separators corrected in draft.
+No Issues created.

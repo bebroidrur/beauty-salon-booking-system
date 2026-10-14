@@ -1,0 +1,29 @@
+PASS: six source documents: D/REQ/risk IDs, local links, Markdown tables; 16 risk scores and six Gate passports.
+PASS: B0 reproduces all 45 published AI/Human windows; L=31.75, G=34.75, R=42.5 workdays.
+PASS: S2 Human=224 hours; R=45.5 workdays; end=2026-12-21 13:00 Europe/Kyiv.
+PASS: S2 L=32.25; G=35.5. Forward/backward passes feasible.
+PASS: dependencies acyclic; per-resource slots disjoint; ten Monday G-R5; weekly Human <=40 hours.
+PASS: all generated scenario tables and diagram match model.
+LIMIT: unknown NF work and G-R4 preparation excluded; no Gate or product acceptance performed.
+PASS: all spec/ hashes match pre-task snapshot; git diff HEAD -- spec/ src/ is empty.
+PASS: index unchanged and empty; all 17 untracked files match lab 3 artifact scope.
+PASS: all lab 3 Markdown links resolve; all 17 candidate files have no trailing whitespace.
+SCOPE: planning consistency only; no product code, issues, commit, push or PLAN-GATE.
+FILES TO COMMIT (not staged):
+docs/lab3/additional-gates.md
+docs/lab3/commit-readiness.md
+docs/lab3/critical-path.md
+docs/lab3/decomposition-draft.md
+docs/lab3/decomposition-review.md
+docs/lab3/gantt.md
+docs/lab3/human-review-capacity.md
+docs/lab3/implementation-plan.md
+docs/lab3/risk-register.md
+logs/critical-path-check.txt
+logs/decomposition-dependencies-check.txt
+logs/decomposition-matrix-format-check.txt
+logs/decomposition-review-check.txt
+logs/gantt-check.txt
+logs/implementation-plan-check.txt
+logs/lab3-step17-check.txt
+scripts/check_lab3_scenarios.py
