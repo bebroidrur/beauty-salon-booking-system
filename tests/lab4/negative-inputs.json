@@ -1,0 +1,10 @@
+[
+  {"id":"missing-registration-fields","method":"POST","path":"/users","body":{},"status":422},
+  {"id":"extra-registration-role","method":"POST","path":"/users","body":{"name":"Test","phone":"test","email":"client@example.test","password":"mock-only","role":"administrator"},"status":422},
+  {"id":"invalid-email","method":"POST","path":"/sessions","body":{"email":"not-email","password":"mock-only"},"status":422},
+  {"id":"empty-booking-patch","method":"PATCH","path":"/bookings/booking-1","body":{},"headers":{"Authorization":"Bearer mock-token"},"status":422},
+  {"id":"invalid-booking-date","method":"POST","path":"/bookings","body":{"serviceId":"svc-1","masterId":"master-1","startsAt":"tomorrow"},"headers":{"Authorization":"Bearer mock-token"},"status":422},
+  {"id":"missing-slot-query","method":"GET","path":"/masters/master-1/slots","status":422},
+  {"id":"invalid-category","method":"GET","path":"/bookings?category=completed","headers":{"Authorization":"Bearer mock-token"},"status":422},
+  {"id":"missing-auth","method":"GET","path":"/bookings?category=current","status":401}
+]

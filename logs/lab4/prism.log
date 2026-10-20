@@ -1,0 +1,648 @@
+[7:29:01 PM] › [CLI] …  awaiting  Starting Prism…
+[7:29:01 PM] › [CLI] ℹ  info      POST       http://127.0.0.1:4010/users
+[7:29:01 PM] › [CLI] ℹ  info      POST       http://127.0.0.1:4010/sessions
+[7:29:01 PM] › [CLI] ℹ  info      GET        http://127.0.0.1:4010/services
+[7:29:01 PM] › [CLI] ℹ  info      POST       http://127.0.0.1:4010/services
+[7:29:01 PM] › [CLI] ℹ  info      PATCH      http://127.0.0.1:4010/services/svc-1
+[7:29:01 PM] › [CLI] ℹ  info      DELETE     http://127.0.0.1:4010/services/svc-1
+[7:29:01 PM] › [CLI] ℹ  info      GET        http://127.0.0.1:4010/masters
+[7:29:01 PM] › [CLI] ℹ  info      POST       http://127.0.0.1:4010/masters
+[7:29:01 PM] › [CLI] ℹ  info      PATCH      http://127.0.0.1:4010/masters/master-1
+[7:29:01 PM] › [CLI] ℹ  info      DELETE     http://127.0.0.1:4010/masters/master-1
+[7:29:01 PM] › [CLI] ℹ  info      GET        http://127.0.0.1:4010/masters/master-1/schedule
+[7:29:01 PM] › [CLI] ℹ  info      PATCH      http://127.0.0.1:4010/masters/master-1/schedule
+[7:29:01 PM] › [CLI] ℹ  info      GET        http://127.0.0.1:4010/masters/master-1/slots?serviceId=svc-1&date=2026-10-26
+[7:29:01 PM] › [CLI] ℹ  info      GET        http://127.0.0.1:4010/bookings?category=current
+[7:29:01 PM] › [CLI] ℹ  info      POST       http://127.0.0.1:4010/bookings
+[7:29:01 PM] › [CLI] ℹ  info      GET        http://127.0.0.1:4010/bookings/booking-1
+[7:29:01 PM] › [CLI] ℹ  info      PATCH      http://127.0.0.1:4010/bookings/booking-1
+[7:29:01 PM] › [CLI] ℹ  info      POST       http://127.0.0.1:4010/bookings/booking-1/cancellation
+[7:29:01 PM] › [CLI] ▶  start     Prism is listening on http://127.0.0.1:4010
+[7:29:14 PM] › [HTTP SERVER] post /users ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 201
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "201"
+[7:29:14 PM] › [HTTP SERVER] post /users ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 201
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "201"
+[7:29:14 PM] › [HTTP SERVER] post /users ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] post /users ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] post /users ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] post /users ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] post /sessions ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] post /sessions ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] post /sessions ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] post /sessions ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] post /sessions ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] post /sessions ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] post /sessions ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] get /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] get /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] get /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] post /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 201
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "201"
+[7:29:14 PM] › [HTTP SERVER] post /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 201
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "201"
+[7:29:14 PM] › [HTTP SERVER] post /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] post /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] post /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] post /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] post /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] post /services ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] patch /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 204
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "204"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 204
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "204"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] delete /services/svc-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] get /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] get /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] get /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] post /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 201
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "201"
+[7:29:14 PM] › [HTTP SERVER] post /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 201
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "201"
+[7:29:14 PM] › [HTTP SERVER] post /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] post /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] post /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] post /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] post /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] post /masters ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 204
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "204"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 204
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "204"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] delete /masters/master-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] patch /masters/master-1/schedule ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/slots ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/slots ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/slots ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/slots ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/slots ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/slots ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 201
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "201"
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 201
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "201"
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] get /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] get /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] get /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] get /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] get /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] get /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] get /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "200"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 400
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "400"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 500
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "500"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 403
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "403"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 404
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "404"
+[7:29:14 PM] › [HTTP SERVER] post /bookings/booking-1/cancellation ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ✔  success   The request passed the validation rules. Looking for the best response
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 409
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "409"
+[7:29:14 PM] › [HTTP SERVER] post /users ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ⚠  warning   Request did not pass the validation rules
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request body must have required property 'name'
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request body must have required property 'phone'
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request body must have required property 'email'
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request body must have required property 'password'
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Found response 422. I'll try with it.
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   The response 422 has an example. I'll keep going with this one
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.body Request body must have required property 'name'
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.body Request body must have required property 'phone'
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.body Request body must have required property 'email'
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.body Request body must have required property 'password'
+[7:29:14 PM] › [HTTP SERVER] post /users ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ⚠  warning   Request did not pass the validation rules
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request body must NOT have additional properties; found 'role'
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Found response 422. I'll try with it.
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   The response 422 has an example. I'll keep going with this one
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.body Request body must NOT have additional properties; found 'role'
+[7:29:14 PM] › [HTTP SERVER] post /sessions ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ⚠  warning   Request did not pass the validation rules
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request body property email must match format "email"
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Found response 422. I'll try with it.
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   The response 422 has an example. I'll keep going with this one
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.body.email Request body property email must match format "email"
+[7:29:14 PM] › [HTTP SERVER] patch /bookings/booking-1 ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ⚠  warning   Request did not pass the validation rules
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request body must NOT have fewer than 1 properties
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Found response 422. I'll try with it.
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   The response 422 has an example. I'll keep going with this one
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.body Request body must NOT have fewer than 1 properties
+[7:29:14 PM] › [HTTP SERVER] post /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ⚠  warning   Request did not pass the validation rules
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request body property startsAt must match format "date-time"
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Found response 422. I'll try with it.
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   The response 422 has an example. I'll keep going with this one
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.body.startsAt Request body property startsAt must match format "date-time"
+[7:29:14 PM] › [HTTP SERVER] get /masters/master-1/slots ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ⚠  warning   Request did not pass the validation rules
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request query must have required property 'serviceid'
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request query must have required property 'date'
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Found response 422. I'll try with it.
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   The response 422 has an example. I'll keep going with this one
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.query Request query must have required property 'serviceid'
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.query Request query must have required property 'date'
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ⚠  warning   Request did not pass the validation rules
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Request query parameter category must be equal to one of the allowed values: current, history
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Found response 422. I'll try with it.
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   The response 422 has an example. I'll keep going with this one
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 422
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "422"
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request.query.category Request query parameter category must be equal to one of the allowed values: current, history
+[7:29:14 PM] › [HTTP SERVER] get /bookings ℹ  info      Request received
+[7:29:14 PM] ›     [VALIDATOR] ⚠  warning   Request did not pass the validation rules
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Invalid security scheme used
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Found response 401. I'll try with it.
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   The response 401 has an example. I'll keep going with this one
+[7:29:14 PM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 401
+[7:29:14 PM] ›     [NEGOTIATOR] ℹ  info      > Responding with "401"
+[7:29:14 PM] ›     [VALIDATOR] ✖  error     Violation: request Invalid security scheme used

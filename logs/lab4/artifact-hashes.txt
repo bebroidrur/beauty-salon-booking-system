@@ -1,0 +1,3 @@
+SHA-256 of final contract and runner
+1a27aac5cbc9a7a52a96c9a418847cb7dd829ab4891e4207b686c55be3507af2  spec/openapi.yaml
+9476c44bef2f2e367dcb2276c451ed3327cf93c27d51f1c4cf19ab63d33ee073  scripts/check_lab4.py

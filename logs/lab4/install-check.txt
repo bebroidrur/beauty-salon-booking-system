@@ -1,0 +1,10 @@
+npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated json-schema-ref-parser@6.1.0: Please switch to @apidevtools/json-schema-ref-parser
+npm warn deprecated @faker-js/faker@5.5.3: Please update to a newer version.
+
+added 186 packages, and audited 187 packages in 3s
+
+10 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities

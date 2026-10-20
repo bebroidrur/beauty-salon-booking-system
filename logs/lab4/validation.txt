@@ -1,0 +1,4 @@
+PASS OpenAPI 3.0.3: openapi-spec-validator 0.7.2
+PASS 18 unique operations; 64 real functional REQ IDs mapped; 161 examples validated
+PASS 8 baseline SHA-256 hashes unchanged
+PASS 75 traceability rows preserve baseline AC/GWT and lab3 D/Issue links
