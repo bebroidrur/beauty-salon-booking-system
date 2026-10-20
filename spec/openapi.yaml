@@ -1,0 +1,2020 @@
+openapi: 3.0.3
+info:
+  title: Beauty Salon — проєкт REST API, лабораторна №4
+  version: 0.1.0
+  description: 'Проєкт контракту на основі SRS 1.0. Один салон. HTTP-рішення є проєктними,
+    не новими затвердженими вимогами. Припущення: docs/lab4/addendum.md. Mock не виконує
+    бізнес-логіку. Час Europe/Kyiv; RFC3339 містить offset. Статичні приклади мають
+    умовний now=2026-10-20T12:00:00+03:00.'
+servers:
+- url: http://127.0.0.1:4010
+  description: Локальний mock; лише синтетичні дані
+paths:
+  /users:
+    post:
+      operationId: registerClient
+      summary: registerClient
+      description: Публічна реєстрація лише клієнта; роль не приймається з тіла.
+      tags:
+      - users
+      x-requirement-ids:
+      - REQ-F-005
+      - REQ-F-006
+      x-roles:
+      - public
+      security: []
+      responses:
+        '201':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                success:
+                  value:
+                    id: client-1
+                    name: Тестовий клієнт
+                    phone: '+380000000000'
+                    email: client@example.test
+                    role: client
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                EMAIL_IN_USE:
+                  value:
+                    code: EMAIL_IN_USE
+                    message: Email вже використовується.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Registration'
+            example:
+              name: Тестовий клієнт
+              phone: '+380000000000'
+              email: client@example.test
+              password: mock-only-password
+  /sessions:
+    post:
+      operationId: login
+      summary: login
+      description: Вхід клієнта або адміністратора; спосіб створення адміністратора
+        поза цим контрактом.
+      tags:
+      - sessions
+      x-requirement-ids:
+      - REQ-F-007
+      - REQ-F-010
+      x-roles:
+      - public
+      security: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+              examples:
+                success:
+                  value:
+                    accessToken: mock-token
+                    tokenType: Bearer
+                    user:
+                      id: client-1
+                      name: Тестовий клієнт
+                      phone: '+380000000000'
+                      email: client@example.test
+                      role: client
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '409':
+          $ref: '#/components/responses/Error409'
+        '401':
+          description: Потрібен вхід або правильні облікові дані.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                INVALID_CREDENTIALS:
+                  value:
+                    code: INVALID_CREDENTIALS
+                    message: Неправильний email або пароль.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+            example:
+              email: client@example.test
+              password: mock-only-password
+  /services:
+    get:
+      operationId: listServices
+      summary: listServices
+      description: Публічний каталог. Поле active показує придатність для нових записів;
+        правила видимості деактивованих потребують уточнення.
+      tags:
+      - services
+      x-requirement-ids:
+      - REQ-F-001
+      - REQ-F-002
+      x-roles:
+      - public
+      security: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+              examples:
+                success:
+                  value:
+                    items:
+                    - id: svc-1
+                      name: Стрижка
+                      description: Стрижка волосся
+                      price: 500
+                      durationMinutes: 60
+                      currency: UAH
+                      active: true
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+    post:
+      operationId: createService
+      summary: createService
+      description: createService
+      tags:
+      - services
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-045
+      - REQ-F-046
+      - REQ-F-052
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '201':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+              examples:
+                success:
+                  value:
+                    id: svc-1
+                    name: Стрижка
+                    description: Стрижка волосся
+                    price: 500
+                    durationMinutes: 60
+                    currency: UAH
+                    active: true
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '409':
+          $ref: '#/components/responses/Error409'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceCreate'
+            example:
+              name: Стрижка
+              description: Стрижка волосся
+              price: 500
+              durationMinutes: 60
+  /services/{serviceId}:
+    patch:
+      operationId: updateService
+      summary: updateService
+      description: Часткова зміна; active=false — деактивація, наявні записи зберігаються.
+      tags:
+      - services
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-045
+      - REQ-F-046
+      - REQ-F-052
+      - REQ-F-054
+      - REQ-F-055
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+              examples:
+                success:
+                  value:
+                    id: svc-1
+                    name: Стрижка
+                    description: Стрижка волосся
+                    price: 500
+                    durationMinutes: 60
+                    currency: UAH
+                    active: false
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                CURRENT_BOOKINGS_CONFLICT:
+                  value:
+                    code: CURRENT_BOOKINGS_CONFLICT
+                    message: Спочатку змініть або скасуйте конфліктні актуальні записи.
+      parameters:
+      - name: serviceId
+        in: path
+        required: true
+        description: serviceId
+        schema:
+          type: string
+          minLength: 1
+          example: svc-1
+        example: svc-1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServicePatch'
+            example:
+              active: false
+    delete:
+      operationId: deleteService
+      summary: deleteService
+      description: Фізичне видалення. За пов’язаних актуальних записів 409. Збереження
+        історії при видаленні — відкрите D-06, не підтверджене mock.
+      tags:
+      - services
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-053
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: Видалено; без тіла
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                CURRENT_BOOKINGS_EXIST:
+                  value:
+                    code: CURRENT_BOOKINGS_EXIST
+                    message: Є пов’язані актуальні записи.
+      parameters:
+      - name: serviceId
+        in: path
+        required: true
+        description: serviceId
+        schema:
+          type: string
+          minLength: 1
+          example: svc-1
+        example: svc-1
+  /masters:
+    get:
+      operationId: listMasters
+      summary: listMasters
+      description: Публічний каталог. Поле active показує придатність для нових записів;
+        правила видимості деактивованих потребують уточнення.
+      tags:
+      - masters
+      x-requirement-ids:
+      - REQ-F-003
+      - REQ-F-012
+      x-roles:
+      - public
+      security: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MasterList'
+              examples:
+                success:
+                  value:
+                    items:
+                    - id: master-1
+                      name: Олена
+                      serviceIds:
+                      - svc-1
+                      active: true
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+    post:
+      operationId: createMaster
+      summary: createMaster
+      description: createMaster
+      tags:
+      - masters
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-047
+      - REQ-F-051
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '201':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Master'
+              examples:
+                success:
+                  value:
+                    id: master-1
+                    name: Олена
+                    serviceIds:
+                    - svc-1
+                    active: true
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '409':
+          $ref: '#/components/responses/Error409'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MasterCreate'
+            example:
+              name: Олена
+              serviceIds:
+              - svc-1
+  /masters/{masterId}:
+    patch:
+      operationId: updateMaster
+      summary: updateMaster
+      description: Часткова зміна; active=false — деактивація, наявні записи зберігаються.
+      tags:
+      - masters
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-047
+      - REQ-F-051
+      - REQ-F-054
+      - REQ-F-055
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Master'
+              examples:
+                success:
+                  value:
+                    id: master-1
+                    name: Олена
+                    serviceIds:
+                    - svc-1
+                    active: true
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                CURRENT_BOOKINGS_CONFLICT:
+                  value:
+                    code: CURRENT_BOOKINGS_CONFLICT
+                    message: Спочатку змініть або скасуйте конфліктні актуальні записи.
+      parameters:
+      - name: masterId
+        in: path
+        required: true
+        description: masterId
+        schema:
+          type: string
+          minLength: 1
+          example: master-1
+        example: master-1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MasterPatch'
+            example:
+              serviceIds:
+              - svc-1
+    delete:
+      operationId: deleteMaster
+      summary: deleteMaster
+      description: Фізичне видалення. За пов’язаних актуальних записів 409. Збереження
+        історії при видаленні — відкрите D-06, не підтверджене mock.
+      tags:
+      - masters
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-053
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: Видалено; без тіла
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                CURRENT_BOOKINGS_EXIST:
+                  value:
+                    code: CURRENT_BOOKINGS_EXIST
+                    message: Є пов’язані актуальні записи.
+      parameters:
+      - name: masterId
+        in: path
+        required: true
+        description: masterId
+        schema:
+          type: string
+          minLength: 1
+          example: master-1
+        example: master-1
+  /masters/{masterId}/schedule:
+    get:
+      operationId: getSchedule
+      summary: getSchedule
+      description: Перегляд тижневого графіка та винятків для редагування адміністратором.
+      tags:
+      - masters
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-048
+      - REQ-F-049
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+              examples:
+                success:
+                  value:
+                    masterId: master-1
+                    timezone: Europe/Kyiv
+                    weekly:
+                      monday:
+                        working: true
+                        interval:
+                          start: 09:00
+                          end: '18:00'
+                      tuesday:
+                        working: false
+                      wednesday:
+                        working: false
+                      thursday:
+                        working: false
+                      friday:
+                        working: false
+                      saturday:
+                        working: false
+                      sunday:
+                        working: false
+                    exceptions: []
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+      parameters:
+      - name: masterId
+        in: path
+        required: true
+        description: masterId
+        schema:
+          type: string
+          minLength: 1
+          example: master-1
+        example: master-1
+    patch:
+      operationId: updateSchedule
+      summary: updateSchedule
+      description: Заміна переданих частин графіка; жодних окремих перерв. Конфлікт
+        із актуальними записами блокує всю зміну.
+      tags:
+      - masters
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-048
+      - REQ-F-049
+      - REQ-F-050
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+              examples:
+                success:
+                  value:
+                    masterId: master-1
+                    timezone: Europe/Kyiv
+                    weekly:
+                      monday:
+                        working: true
+                        interval:
+                          start: 09:00
+                          end: '18:00'
+                      tuesday:
+                        working: false
+                      wednesday:
+                        working: false
+                      thursday:
+                        working: false
+                      friday:
+                        working: false
+                      saturday:
+                        working: false
+                      sunday:
+                        working: false
+                    exceptions: []
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                SCHEDULE_CONFLICT:
+                  value:
+                    code: SCHEDULE_CONFLICT
+                    message: Зміна графіка суперечить актуальним записам.
+      parameters:
+      - name: masterId
+        in: path
+        required: true
+        description: masterId
+        schema:
+          type: string
+          minLength: 1
+          example: master-1
+        example: master-1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchedulePatch'
+            example:
+              weekly:
+                monday:
+                  working: true
+                  interval:
+                    start: 09:00
+                    end: '18:00'
+                tuesday:
+                  working: false
+                wednesday:
+                  working: false
+                thursday:
+                  working: false
+                friday:
+                  working: false
+                saturday:
+                  working: false
+                sunday:
+                  working: false
+              exceptions: []
+  /masters/{masterId}/slots:
+    get:
+      operationId: listSlots
+      summary: listSlots
+      description: Вільні інтервали майстра для однієї послуги й дати. Не гарантує
+        відсутність конфлікту конкретного клієнта. Межа горизонту та прив’язка сітки
+        залишаються D-02/D-03.
+      tags:
+      - masters
+      x-requirement-ids:
+      - REQ-F-004
+      - REQ-F-012
+      - REQ-F-017
+      - REQ-F-018
+      - REQ-F-021
+      - REQ-F-022
+      - REQ-F-023
+      - REQ-F-025
+      - REQ-F-026
+      - REQ-F-055
+      x-roles:
+      - public
+      security: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Availability'
+              examples:
+                success:
+                  value:
+                    masterId: master-1
+                    serviceId: svc-1
+                    timezone: Europe/Kyiv
+                    slots:
+                    - startsAt: '2026-10-26T10:00:00+02:00'
+                      endsAt: '2026-10-26T11:00:00+02:00'
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '404':
+          $ref: '#/components/responses/Error404'
+      parameters:
+      - name: masterId
+        in: path
+        required: true
+        description: masterId
+        schema:
+          type: string
+          minLength: 1
+          example: master-1
+        example: master-1
+      - name: serviceId
+        in: query
+        required: true
+        description: serviceId
+        schema:
+          type: string
+          minLength: 1
+          example: svc-1
+        example: svc-1
+      - name: date
+        in: query
+        required: true
+        description: date
+        schema:
+          type: string
+          format: date
+        example: '2026-10-26'
+  /bookings:
+    get:
+      operationId: listBookings
+      summary: listBookings
+      description: 'Клієнт бачить лише власні записи; адміністратор — записи клієнтів.
+        current: нескасовані до endsAt; history: скасовані або now >= endsAt.'
+      tags:
+      - bookings
+      x-requirement-ids:
+      - REQ-F-009
+      - REQ-F-010
+      - REQ-F-030
+      - REQ-F-031
+      - REQ-F-032
+      - REQ-F-033
+      x-roles:
+      - client
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingList'
+              examples:
+                success:
+                  value:
+                    items:
+                    - id: booking-1
+                      clientId: client-1
+                      serviceId: svc-1
+                      masterId: master-1
+                      startsAt: '2026-10-26T10:00:00+02:00'
+                      masterName: Олена
+                      serviceSnapshot:
+                        name: Стрижка
+                        price: 500
+                        currency: UAH
+                        durationMinutes: 60
+                      endsAt: '2026-10-26T11:00:00+02:00'
+                      status: confirmed
+                      category: current
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+      parameters:
+      - name: category
+        in: query
+        required: true
+        description: category
+        schema:
+          type: string
+          enum:
+          - current
+          - history
+          example: current
+        example: current
+    post:
+      operationId: createBooking
+      summary: createBooking
+      description: 'Клієнт: власник із сесії, >=2 год до початку. Адміністратор: clientId
+        обов’язковий, правило 2 год не діє. Одна послуга/майстер, відповідність, активність,
+        графік, горизонт 30 днів, конфлікти майстра й клієнта перевіряються при збереженні;
+        суміжність дозволена. При конкурентному бронюванні лише один успіх. Фіксуються
+        назва/ціна/тривалість, endsAt обчислюється. Підтвердження автоматичне, email
+        та нагадування — побічні ефекти, mock їх не виконує.'
+      tags:
+      - bookings
+      x-requirement-ids:
+      - REQ-F-008
+      - REQ-F-009
+      - REQ-F-010
+      - REQ-F-011
+      - REQ-F-012
+      - REQ-F-013
+      - REQ-F-014
+      - REQ-F-015
+      - REQ-F-016
+      - REQ-F-017
+      - REQ-F-018
+      - REQ-F-019
+      - REQ-F-020
+      - REQ-F-021
+      - REQ-F-022
+      - REQ-F-023
+      - REQ-F-024
+      - REQ-F-025
+      - REQ-F-026
+      - REQ-F-027
+      - REQ-F-028
+      - REQ-F-029
+      - REQ-F-055
+      - REQ-F-056
+      - REQ-F-059
+      - REQ-F-060
+      x-roles:
+      - client
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '201':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+              examples:
+                success:
+                  value:
+                    id: booking-1
+                    clientId: client-1
+                    serviceId: svc-1
+                    masterId: master-1
+                    startsAt: '2026-10-26T10:00:00+02:00'
+                    masterName: Олена
+                    serviceSnapshot:
+                      name: Стрижка
+                      price: 500
+                      currency: UAH
+                      durationMinutes: 60
+                    endsAt: '2026-10-26T11:00:00+02:00'
+                    status: confirmed
+                    category: current
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          description: Дані не відповідають схемі або правилам.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                BOOKING_RULE_VIOLATION:
+                  value:
+                    code: BOOKING_RULE_VIOLATION
+                    message: Перевірте строк, горизонт, активність та відповідність
+                      послуги майстру.
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                TIME_UNAVAILABLE:
+                  value:
+                    code: TIME_UNAVAILABLE
+                    message: Обраний час недоступний. Оберіть інший.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingCreate'
+            example:
+              serviceId: svc-1
+              masterId: master-1
+              startsAt: '2026-10-26T10:00:00+02:00'
+  /bookings/{bookingId}:
+    get:
+      operationId: getBooking
+      summary: getBooking
+      description: Власник або адміністратор; чужі записи клієнту недоступні (403).
+      tags:
+      - bookings
+      x-requirement-ids:
+      - REQ-F-009
+      - REQ-F-010
+      - REQ-F-031
+      x-roles:
+      - client
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+              examples:
+                success:
+                  value:
+                    id: booking-1
+                    clientId: client-1
+                    serviceId: svc-1
+                    masterId: master-1
+                    startsAt: '2026-10-26T10:00:00+02:00'
+                    masterName: Олена
+                    serviceSnapshot:
+                      name: Стрижка
+                      price: 500
+                      currency: UAH
+                      durationMinutes: 60
+                    endsAt: '2026-10-26T11:00:00+02:00'
+                    status: confirmed
+                    category: current
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+      parameters:
+      - name: bookingId
+        in: path
+        required: true
+        description: bookingId
+        schema:
+          type: string
+          minLength: 1
+          example: booking-1
+        example: booking-1
+    patch:
+      operationId: updateBooking
+      summary: updateBooking
+      description: Лише актуальний запис. Клієнту 403. Повторна перевірка графіка
+        та конфліктів; історія незмінна. Без заміни serviceId знімок послуги зберігається,
+        при явній заміні береться новий. endsAt перераховується; при перенесенні нагадування
+        переплановується за SRS. D-04/D-05/D-06 залишаються відкритими.
+      tags:
+      - bookings
+      x-requirement-ids:
+      - REQ-F-010
+      - REQ-F-017
+      - REQ-F-021
+      - REQ-F-022
+      - REQ-F-023
+      - REQ-F-024
+      - REQ-F-025
+      - REQ-F-026
+      - REQ-F-027
+      - REQ-F-038
+      - REQ-F-039
+      - REQ-F-040
+      - REQ-F-041
+      - REQ-F-042
+      - REQ-F-043
+      - REQ-F-044
+      - REQ-F-057
+      - REQ-F-062
+      - REQ-F-063
+      - REQ-F-064
+      x-roles:
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+              examples:
+                success:
+                  value:
+                    id: booking-1
+                    clientId: client-1
+                    serviceId: svc-1
+                    masterId: master-1
+                    startsAt: '2026-10-27T10:00:00+02:00'
+                    masterName: Олена
+                    serviceSnapshot:
+                      name: Стрижка
+                      price: 500
+                      currency: UAH
+                      durationMinutes: 60
+                    endsAt: '2026-10-27T11:00:00+02:00'
+                    status: confirmed
+                    category: current
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          $ref: '#/components/responses/Error422'
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                BOOKING_CHANGE_CONFLICT:
+                  value:
+                    code: BOOKING_CHANGE_CONFLICT
+                    message: Історичний запис або конфлікт доступності.
+      parameters:
+      - name: bookingId
+        in: path
+        required: true
+        description: bookingId
+        schema:
+          type: string
+          minLength: 1
+          example: booking-1
+        example: booking-1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingPatch'
+            example:
+              startsAt: '2026-10-27T10:00:00+02:00'
+  /bookings/{bookingId}/cancellation:
+    post:
+      operationId: cancelBooking
+      summary: cancelBooking
+      description: 'Скасування зберігає історію, не є DELETE. Власник: >=24 год включно;
+        менше — звернення до адміністратора. Адміністратор без обмеження 24 год. Історичний
+        запис незмінний. Звільняється час, скасовуються нагадування, надсилається
+        email.'
+      tags:
+      - bookings
+      x-requirement-ids:
+      - REQ-F-009
+      - REQ-F-010
+      - REQ-F-025
+      - REQ-F-034
+      - REQ-F-035
+      - REQ-F-036
+      - REQ-F-037
+      - REQ-F-041
+      - REQ-F-058
+      - REQ-F-061
+      x-roles:
+      - client
+      - administrator
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Успішно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+              examples:
+                success:
+                  value:
+                    id: booking-1
+                    clientId: client-1
+                    serviceId: svc-1
+                    masterId: master-1
+                    startsAt: '2026-10-26T10:00:00+02:00'
+                    masterName: Олена
+                    serviceSnapshot:
+                      name: Стрижка
+                      price: 500
+                      currency: UAH
+                      durationMinutes: 60
+                    endsAt: '2026-10-26T11:00:00+02:00'
+                    status: cancelled
+                    category: history
+        '400':
+          $ref: '#/components/responses/Error400'
+        '422':
+          description: Дані не відповідають схемі або правилам.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                CANCELLATION_TOO_LATE:
+                  value:
+                    code: CANCELLATION_TOO_LATE
+                    message: До початку менше 24 годин. Зверніться до адміністратора.
+        '500':
+          $ref: '#/components/responses/Error500'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '409':
+          description: Операція конфліктує з поточними даними.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                HISTORICAL_BOOKING:
+                  value:
+                    code: HISTORICAL_BOOKING
+                    message: Історичний запис не можна скасувати.
+      parameters:
+      - name: bookingId
+        in: path
+        required: true
+        description: bookingId
+        schema:
+          type: string
+          minLength: 1
+          example: booking-1
+        example: booking-1
+components:
+  schemas:
+    ServiceCreate:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+        price:
+          type: number
+          minimum: 0
+          multipleOf: 0.01
+        durationMinutes:
+          type: integer
+          minimum: 1
+      required:
+      - name
+      - description
+      - price
+      - durationMinutes
+      example:
+        name: Стрижка
+        description: Стрижка волосся
+        price: 500
+        durationMinutes: 60
+    ServicePatch:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+        price:
+          type: number
+          minimum: 0
+          multipleOf: 0.01
+        durationMinutes:
+          type: integer
+          minimum: 1
+        active:
+          type: boolean
+      minProperties: 1
+      example:
+        active: false
+    Service:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          minLength: 1
+          example: svc-1
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+        price:
+          type: number
+          minimum: 0
+          multipleOf: 0.01
+        durationMinutes:
+          type: integer
+          minimum: 1
+        currency:
+          type: string
+          enum:
+          - UAH
+        active:
+          type: boolean
+      required:
+      - id
+      - name
+      - description
+      - price
+      - durationMinutes
+      - currency
+      - active
+      example:
+        id: svc-1
+        name: Стрижка
+        description: Стрижка волосся
+        price: 500
+        durationMinutes: 60
+        currency: UAH
+        active: true
+    MasterCreate:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+        serviceIds:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            example: svc-1
+          uniqueItems: true
+      required:
+      - name
+      - serviceIds
+      example:
+        name: Олена
+        serviceIds:
+        - svc-1
+    MasterPatch:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+        serviceIds:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            example: svc-1
+          uniqueItems: true
+        active:
+          type: boolean
+      minProperties: 1
+      example:
+        serviceIds:
+        - svc-1
+    Master:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          minLength: 1
+          example: svc-1
+        name:
+          type: string
+          minLength: 1
+        serviceIds:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            example: svc-1
+          uniqueItems: true
+        active:
+          type: boolean
+      required:
+      - id
+      - name
+      - serviceIds
+      - active
+      example:
+        id: master-1
+        name: Олена
+        serviceIds:
+        - svc-1
+        active: true
+    Registration:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+        phone:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 1
+          writeOnly: true
+      required:
+      - name
+      - phone
+      - email
+      - password
+      example:
+        name: Тестовий клієнт
+        phone: '+380000000000'
+        email: client@example.test
+        password: mock-only-password
+    User:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          minLength: 1
+          example: svc-1
+        name:
+          type: string
+          minLength: 1
+        phone:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum:
+          - client
+          - administrator
+      required:
+      - id
+      - name
+      - phone
+      - email
+      - role
+      example:
+        id: client-1
+        name: Тестовий клієнт
+        phone: '+380000000000'
+        email: client@example.test
+        role: client
+    Login:
+      type: object
+      additionalProperties: false
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 1
+          writeOnly: true
+      required:
+      - email
+      - password
+      example:
+        email: client@example.test
+        password: mock-only-password
+    Session:
+      type: object
+      additionalProperties: false
+      properties:
+        accessToken:
+          type: string
+        tokenType:
+          type: string
+          enum:
+          - Bearer
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+      - accessToken
+      - tokenType
+      - user
+      example:
+        accessToken: mock-token
+        tokenType: Bearer
+        user:
+          id: client-1
+          name: Тестовий клієнт
+          phone: '+380000000000'
+          email: client@example.test
+          role: client
+    WorkInterval:
+      type: object
+      additionalProperties: false
+      properties:
+        start:
+          type: string
+          pattern: ^([01][0-9]|2[0-3]):[0-5][0-9]$
+        end:
+          type: string
+          pattern: ^([01][0-9]|2[0-3]):[0-5][0-9]$
+      required:
+      - start
+      - end
+      description: Один інтервал, start < end; перевірка співвідношення — семантична.
+    Day:
+      oneOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          working:
+            type: boolean
+            enum:
+            - false
+        required:
+        - working
+      - type: object
+        additionalProperties: false
+        properties:
+          working:
+            type: boolean
+            enum:
+            - true
+          interval:
+            $ref: '#/components/schemas/WorkInterval'
+        required:
+        - working
+        - interval
+    Week:
+      type: object
+      additionalProperties: false
+      properties:
+        monday:
+          $ref: '#/components/schemas/Day'
+        tuesday:
+          $ref: '#/components/schemas/Day'
+        wednesday:
+          $ref: '#/components/schemas/Day'
+        thursday:
+          $ref: '#/components/schemas/Day'
+        friday:
+          $ref: '#/components/schemas/Day'
+        saturday:
+          $ref: '#/components/schemas/Day'
+        sunday:
+          $ref: '#/components/schemas/Day'
+      required:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+    ScheduleException:
+      type: object
+      additionalProperties: false
+      properties:
+        date:
+          type: string
+          format: date
+        kind:
+          type: string
+          enum:
+          - vacation
+          - day_off
+          - changed_hours
+        day:
+          $ref: '#/components/schemas/Day'
+      required:
+      - date
+      - kind
+      - day
+      description: 'vacation/day_off: working=false; changed_hours: working=true.
+        Семантична перевірка, не реалізація.'
+    SchedulePatch:
+      type: object
+      additionalProperties: false
+      properties:
+        weekly:
+          $ref: '#/components/schemas/Week'
+        exceptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleException'
+      minProperties: 1
+      description: Передане weekly або exceptions цілком замінює відповідну частину;
+        порожній exceptions очищує винятки. Дати унікальні.
+      example:
+        weekly:
+          monday:
+            working: true
+            interval:
+              start: 09:00
+              end: '18:00'
+          tuesday:
+            working: false
+          wednesday:
+            working: false
+          thursday:
+            working: false
+          friday:
+            working: false
+          saturday:
+            working: false
+          sunday:
+            working: false
+        exceptions: []
+    Schedule:
+      type: object
+      additionalProperties: false
+      properties:
+        masterId:
+          type: string
+          minLength: 1
+          example: svc-1
+        timezone:
+          type: string
+          enum:
+          - Europe/Kyiv
+        weekly:
+          $ref: '#/components/schemas/Week'
+        exceptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleException'
+      required:
+      - masterId
+      - timezone
+      - weekly
+      - exceptions
+      example:
+        masterId: master-1
+        timezone: Europe/Kyiv
+        weekly:
+          monday:
+            working: true
+            interval:
+              start: 09:00
+              end: '18:00'
+          tuesday:
+            working: false
+          wednesday:
+            working: false
+          thursday:
+            working: false
+          friday:
+            working: false
+          saturday:
+            working: false
+          sunday:
+            working: false
+        exceptions: []
+    Slot:
+      type: object
+      additionalProperties: false
+      properties:
+        startsAt:
+          type: string
+          format: date-time
+        endsAt:
+          type: string
+          format: date-time
+      required:
+      - startsAt
+      - endsAt
+      example:
+        startsAt: '2026-10-26T10:00:00+02:00'
+        endsAt: '2026-10-26T11:00:00+02:00'
+    Availability:
+      type: object
+      additionalProperties: false
+      properties:
+        masterId:
+          type: string
+          minLength: 1
+          example: svc-1
+        serviceId:
+          type: string
+          minLength: 1
+          example: svc-1
+        timezone:
+          type: string
+          enum:
+          - Europe/Kyiv
+        slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/Slot'
+      required:
+      - masterId
+      - serviceId
+      - timezone
+      - slots
+      example:
+        masterId: master-1
+        serviceId: svc-1
+        timezone: Europe/Kyiv
+        slots:
+        - startsAt: '2026-10-26T10:00:00+02:00'
+          endsAt: '2026-10-26T11:00:00+02:00'
+    BookingCreate:
+      type: object
+      additionalProperties: false
+      properties:
+        serviceId:
+          type: string
+          minLength: 1
+          example: svc-1
+        masterId:
+          type: string
+          minLength: 1
+          example: svc-1
+        startsAt:
+          type: string
+          format: date-time
+        clientId:
+          type: string
+          minLength: 1
+          example: svc-1
+      required:
+      - serviceId
+      - masterId
+      - startsAt
+      description: 'Клієнт не передає clientId: власник визначається сесією. Адміністратор
+        зобов’язаний передати ID зареєстрованого клієнта. Умовність залежить від ролі,
+        не виражається JSON-схемою.'
+      example:
+        serviceId: svc-1
+        masterId: master-1
+        startsAt: '2026-10-26T10:00:00+02:00'
+    BookingPatch:
+      type: object
+      additionalProperties: false
+      properties:
+        serviceId:
+          type: string
+          minLength: 1
+          example: svc-1
+        masterId:
+          type: string
+          minLength: 1
+          example: svc-1
+        startsAt:
+          type: string
+          format: date-time
+      minProperties: 1
+      example:
+        startsAt: '2026-10-27T10:00:00+02:00'
+    ServiceSnapshot:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+          minimum: 0
+          multipleOf: 0.01
+        currency:
+          type: string
+          enum:
+          - UAH
+        durationMinutes:
+          type: integer
+          minimum: 1
+      required:
+      - name
+      - price
+      - currency
+      - durationMinutes
+    Booking:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          minLength: 1
+          example: svc-1
+        clientId:
+          type: string
+          minLength: 1
+          example: svc-1
+        serviceId:
+          type: string
+          minLength: 1
+          example: svc-1
+        masterId:
+          type: string
+          minLength: 1
+          example: svc-1
+        startsAt:
+          type: string
+          format: date-time
+        masterName:
+          type: string
+        serviceSnapshot:
+          $ref: '#/components/schemas/ServiceSnapshot'
+        endsAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - confirmed
+          - cancelled
+        category:
+          type: string
+          enum:
+          - current
+          - history
+      required:
+      - id
+      - clientId
+      - serviceId
+      - masterId
+      - startsAt
+      - masterName
+      - serviceSnapshot
+      - endsAt
+      - status
+      - category
+      description: category обчислюється за скасуванням або розрахованим завершенням;
+        не є фактом виконання послуги.
+      example:
+        id: booking-1
+        clientId: client-1
+        serviceId: svc-1
+        masterId: master-1
+        startsAt: '2026-10-26T10:00:00+02:00'
+        masterName: Олена
+        serviceSnapshot:
+          name: Стрижка
+          price: 500
+          currency: UAH
+          durationMinutes: 60
+        endsAt: '2026-10-26T11:00:00+02:00'
+        status: confirmed
+        category: current
+    ServiceList:
+      type: object
+      additionalProperties: false
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+      required:
+      - items
+      example:
+        items:
+        - id: svc-1
+          name: Стрижка
+          description: Стрижка волосся
+          price: 500
+          durationMinutes: 60
+          currency: UAH
+          active: true
+    MasterList:
+      type: object
+      additionalProperties: false
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Master'
+      required:
+      - items
+      example:
+        items:
+        - id: master-1
+          name: Олена
+          serviceIds:
+          - svc-1
+          active: true
+    BookingList:
+      type: object
+      additionalProperties: false
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Booking'
+      required:
+      - items
+      example:
+        items:
+        - id: booking-1
+          clientId: client-1
+          serviceId: svc-1
+          masterId: master-1
+          startsAt: '2026-10-26T10:00:00+02:00'
+          masterName: Олена
+          serviceSnapshot:
+            name: Стрижка
+            price: 500
+            currency: UAH
+            durationMinutes: 60
+          endsAt: '2026-10-26T11:00:00+02:00'
+          status: confirmed
+          category: current
+    ApiError:
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+            required:
+            - field
+            - message
+      required:
+      - code
+      - message
+      description: Єдина модель помилки. Без персональних даних, stack trace, SQL
+        або внутрішніх ідентифікаторів реалізації.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Проєктна домовленість; не визначає JWT або спосіб зберігання. Ролі
+        перевіряються окремо.
+  responses:
+    Error400:
+      description: Некоректні параметри запиту.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            default:
+              value:
+                code: INVALID_REQUEST
+                message: Некоректні параметри запиту.
+    Error401:
+      description: Потрібен вхід або правильні облікові дані.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            default:
+              value:
+                code: UNAUTHENTICATED
+                message: Потрібен вхід або правильні облікові дані.
+    Error403:
+      description: Операція недоступна для цього користувача.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            default:
+              value:
+                code: FORBIDDEN
+                message: Операція недоступна для цього користувача.
+    Error404:
+      description: Ресурс не знайдено.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            default:
+              value:
+                code: NOT_FOUND
+                message: Ресурс не знайдено.
+    Error409:
+      description: Операція конфліктує з поточними даними.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            default:
+              value:
+                code: CONFLICT
+                message: Операція конфліктує з поточними даними.
+    Error422:
+      description: Дані не відповідають схемі або правилам.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            default:
+              value:
+                code: VALIDATION_ERROR
+                message: Дані не відповідають схемі або правилам.
+    Error500:
+      description: Не вдалося обробити запит.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            default:
+              value:
+                code: INTERNAL_ERROR
+                message: Не вдалося обробити запит.
