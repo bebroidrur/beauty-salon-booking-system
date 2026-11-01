@@ -1,0 +1,49 @@
+{
+  "time": "2026-11-01T15:10:18.488814+00:00",
+  "cwd": "/Users/mac/PycharmProjects/beauty-salon-booking-system",
+  "command": [
+    "/tmp/beauty-lab5-runtime/bin/python",
+    "-m",
+    "pytest",
+    "tests/lab5",
+    "-q",
+    "--tb=short"
+  ],
+  "head": "a33edcbe05c499cf4bc03f228801655fb7da98b3",
+  "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "source_sha256": {
+    "salon/__init__.py": "bd6ddcf649424077e2acbe45ac612afba6c25c299c45392459ec8fd589659347",
+    "salon/app.py": "564b9cc48f95174c4e3983dac66686c5675e33ca5706fb875fe8d8c61568ace6",
+    "salon/auth.py": "56f4c26d9925480bfcf35026d8c4d9057246799ea8fa837e3702ae6782cadb1f",
+    "salon/booking_service.py": "92c3658cf00f772ba56ac70aa91ccba98c3982044990e796992893bf134512fb",
+    "salon/contract.py": "81736a8674eab541ad3ad08c72b473b89bdcb1a3ad17d994e377d1b130d95f54",
+    "salon/errors.py": "4ce4c46ae891398ef95443994d5fb91bfb7eeec4be9950ab044e9ed6c6aef418",
+    "salon/events.py": "93e87eda84f7dc86f84ef4e2c14b2f4559192eef50eadf62367d87face6e2011",
+    "salon/mail_worker.py": "905550e1a486dae68c223a84cc594758e8ae3bdb4da66eeb7c413b6be352b3c6",
+    "salon/notifications.py": "6cfbcc406638deb70c060b124b49dd4edcefea98250b83f3bb47d68be6f6b7bc",
+    "salon/service.py": "0b89104462b1742b032d8c677ea63e2d5c1cad9388e4fd5402d1a7e7188a147e",
+    "salon/store.py": "b8860343fd79b67c16f9d19aaa7d48adda1359a3233d980d8bca9f0d104b7105",
+    "salon/time_rules.py": "fa26e376034ab6024aa5004b440f844913933792b7395bb2661631207f97fc9b",
+    "tests/lab5/conftest.py": "9e94218869129cd6b5715d6e352ae0cdc75dd8334946d9a567526b214d1be13d",
+    "tests/lab5/test_a_catalog_access.py": "b5f88ff65993f72e796d554f6de567601016fad531da1198c1a3e37f161e7b4c",
+    "tests/lab5/test_b_bookings.py": "bb8a01e03c9e15cf348bd59ba354cf350e4d38a72ef9f104ba39e050daf0102c",
+    "tests/lab5/test_c_notifications_logging.py": "8c7d5ab218a5a0721348f2650ce9333216ffca5379d9f17379bdc4230199c421",
+    "tests/lab5/test_d_mail_worker.py": "bbc1d73232b595067ab6c7cab51103e7f88d0d6319b1ae69c9eade88d53f69a6",
+    "spec/SRS.md": "1ebccf10393b35858579fcb7c0f0c572f96b1b7e4cd9425c16fbc88cbbdb71a6",
+    "spec/acceptance-criteria.md": "6cef87dd500a63394c8c972ef2ece8f3c3bf8ca23b93829b57c9246b83c8a02a",
+    "spec/functional-requirements.md": "1bff3bd25cd12a7a0a24e136a0a43da7f24b830ee1d2963115356847d8f9e3b7",
+    "spec/given-when-then.md": "c9c571347f2961fe1b44474e7eb9f2b34565c00cb0fd118973d28dcad4140ae1",
+    "spec/glossary.md": "dcc92f3de0c348d3c1681c25b9cab8029bdfd7bb43cd896e70bbeb9ffb74d87a",
+    "spec/idea.md": "029a00c61c921d0029e1aff752c787c9081f78879fc3dcba6eb75420ec68a54f",
+    "spec/non-functional-requirements.md": "83405354418d44cf8e8be7560e6b6e2103a264ca1cfa6502a439ad132f19fcae",
+    "spec/openapi.yaml": "1a27aac5cbc9a7a52a96c9a418847cb7dd829ab4891e4207b686c55be3507af2",
+    "spec/questions.md": "c8252f6296f94463c45fe10602f9ae5054dd619bc768fc801d5ec13135d8d5a9",
+    "spec/scope.md": "a5df048b8d7fd942f42601f9a3ba07fe06d0e462325018d52e61c31ab6d2f136",
+    "spec/traceability-matrix.md": "c74b72bf1c60453fda1a2fc13b31a8a2024bff70f9909c4fde882af7cbce86e3"
+  }
+}
+
+...........................................................              [100%]
+59 passed in 18.72s
+
+EXIT_CODE=0

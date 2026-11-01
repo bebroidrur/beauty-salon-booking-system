@@ -31,18 +31,23 @@ class SMTPTransport:
         self.starttls,self.username,self.password=starttls,username,password
 
     def send(self,kind,payload):
-        booking=payload['booking'];snapshot=booking['serviceSnapshot']
-        message=EmailMessage()
-        message['From']=self.sender
-        message['To']=payload['to']
-        message['Subject']={'created':'Підтвердження запису','changed':'Зміна запису',
-                            'cancelled':'Скасування запису','reminder':'Нагадування про запис'}[kind]
-        message.set_content(f"{snapshot['name']}\n{snapshot['price']} {snapshot['currency']}\n"
-                            f"{snapshot['durationMinutes']} хв\n{booking['masterName']}\n"
-                            f"{booking['startsAt']} — {booking['endsAt']}\n{booking['status']}")
+        message = build_message(self.sender,kind,payload)
         with smtplib.SMTP(self.host,self.port,timeout=10) as smtp:
             if self.starttls:
                 smtp.starttls(context=ssl.create_default_context())
             if self.username:
                 smtp.login(self.username,self.password)
             smtp.send_message(message)
+
+
+def build_message(sender,kind,payload):
+    booking=payload['booking'];snapshot=booking['serviceSnapshot']
+    message=EmailMessage()
+    message['From']=sender
+    message['To']=payload['to']
+    message['Subject']={'created':'Підтвердження запису','changed':'Зміна запису',
+                        'cancelled':'Скасування запису','reminder':'Нагадування про запис'}[kind]
+    message.set_content(f"{snapshot['name']}\n{snapshot['price']} {snapshot['currency']}\n"
+                        f"{snapshot['durationMinutes']} хв\n{booking['masterName']}\n"
+                        f"{booking['startsAt']} — {booking['endsAt']}\n{booking['status']}")
+    return message
