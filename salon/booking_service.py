@@ -120,11 +120,11 @@ class Bookings:
         live=[b for b in related if b['category']=='current']
         if operation.startswith('delete'):
             if live:
-                reject(409,'ACTIVE_BOOKINGS_EXIST','Є актуальні записи.')
+                reject(409,'CURRENT_BOOKINGS_EXIST','Є актуальні записи.')
             if related:
                 unresolved('D-06')
         if kind=='master' and 'serviceIds' in data and any(b['serviceId'] not in data['serviceIds'] for b in live):
-            reject(409,'ACTIVE_BOOKINGS_EXIST','Є актуальні записи.')
+            reject(409,'CURRENT_BOOKINGS_CONFLICT','Є актуальні записи.')
 
     def protect_schedule(self,db,key,schedule):
         if any(b['masterId']==key and b['category']=='current' and not self.fits(schedule,instant(b['startsAt']),instant(b['endsAt'])) for b in self.all(db)):
