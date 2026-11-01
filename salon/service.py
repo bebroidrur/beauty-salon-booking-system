@@ -7,6 +7,7 @@ import uuid
 from werkzeug.security import check_password_hash, generate_password_hash
 from salon.errors import reject
 from salon.booking_service import Bookings
+from salon.notifications import on_booking
 
 from salon.time_rules import DAYS
 
@@ -28,7 +29,11 @@ class Service:
 
     def execute(self, db, op, data, params, user):
         if op in ('listBookings','createBooking','getBooking','updateBooking','cancelBooking'):
-            return self.bookings.execute(db,op,data,params,user)
+            before = self.store.get(db,'booking',params.get('bookingId')) if op in ('updateBooking','cancelBooking') else None
+            result = self.bookings.execute(db,op,data,params,user)
+            if op in ('createBooking','updateBooking','cancelBooking'):
+                on_booking(db,before,result,self.bookings.now())
+            return result
         if op == 'registerClient':
             value = {k:v for k,v in data.items() if k != 'password'} | {'id':ident(), 'role':'client'}
             try:

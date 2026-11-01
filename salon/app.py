@@ -1,7 +1,10 @@
 """Flask adapter for the checked-in OpenAPI contract."""
 from datetime import datetime, timezone
 import re
-from flask import Flask, jsonify, request
+import json
+import logging
+import uuid
+from flask import Flask, jsonify, request, g
 from jsonschema.exceptions import ValidationError
 from werkzeug.exceptions import HTTPException
 from salon.auth import authenticate
@@ -18,8 +21,22 @@ def create_app(database, clock=None):
     service = Service(store, clock)
     app.extensions.update(store=store, clock=clock, service=service)
 
+    @app.before_request
+    def correlation():
+        g.request_id = uuid.uuid4().hex
+        g.error_code = None
+
+    @app.after_request
+    def record_action(response):
+        event = dict(time=datetime.now(timezone.utc).isoformat(), requestId=g.request_id,
+                     operation=request.endpoint or 'unmatched', status=response.status_code,
+                     code=g.error_code)
+        logging.getLogger('salon.events').info(json.dumps(event))
+        return response
+
     @app.errorhandler(ApiError)
     def api_error(exc):
+        g.error_code = exc.code
         return jsonify(code=exc.code,message=exc.message),exc.status
 
     @app.errorhandler(HTTPException)
@@ -28,6 +45,7 @@ def create_app(database, clock=None):
 
     @app.errorhandler(Exception)
     def unexpected_error(exc):
+        g.error_code = "INTERNAL_ERROR"
         return jsonify(code='INTERNAL_ERROR',message='Не вдалося обробити запит.'),500
 
     def handler(operation):
