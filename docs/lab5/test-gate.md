@@ -27,3 +27,7 @@ RED: **4 failed, 24 passed, 2 skipped**, `logs/lab5/red/e-contract-regression.tx
 **Повний TEST-GATE: REVISE.** Фінальний прогін: 99 passed / 0 failed / 2 skipped (101 testcase), `logs/lab5/final/verification/regression.txt` і JUnit. Статична валідація OpenAPI PASS; реальний HTTP/SMTP smoke 2 passed. Це достатні докази технічної перевірки реалізованого піднабору, але не всіх 18 операцій і не всіх бізнес-випадків. Два skipped стосуються listSlots, відкриті D-02–D-06 перелічено в README. Human Review залишається NOT REVIEWED; PLAN-GATE REVISE не закрито.
 
 Умови повторного огляду: рішення користувача щодо вже поданих уточнень; справжній RED для залежних слотів/меж/операцій; GREEN і REFACTOR без приховування пропусків; усі 18 реальних HTTP success flows і негативні/граничні сценарії за погодженим обсягом; актуальна матриця та людський перегляд. Нова REQ-F-065 до цього пакета не включена.
+
+## Booking-модуль у скороченому обсязі
+
+Для дозволеного викладачем модуля Bookings локальний TEST-GATE має технічний статус **PASS WITH LIMITATIONS**: п'ять operationId реалізовано й пройшли власний RED/GREEN/REFACTOR, але `listSlots` виключено як окремий BLOCKED D-03, а D-02/D-04/D-05/D-06 не закриті рішенням Human. Це рішення не є GO повного API, PLAN-GATE або продуктового приймання.
