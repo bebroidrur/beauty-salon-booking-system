@@ -15,3 +15,22 @@
 Запропоновані критерії: `AC-REQ-F-065-B-01` — успішне створення, перенесення та скасування мають `accepted` з кореляцією; `AC-REQ-F-065-B-02` — конфлікт, пізнє скасування або чужий доступ мають `rejected`, без зміни запису та без секретів/ПД. Запропонований сценарій: Given власник має запис менш ніж за 24 години; When він скасовує; Then API повертає `CANCELLATION_TOO_LATE`, стан не змінюється, а подія має `cancel`, `rejected`, кореляцію та безпечний код.
 
 Критерії й сценарій мають статус пропозиції; вони не додаються до `spec/acceptance-criteria.md` або `spec/given-when-then.md` до погодження.
+
+## Impact analysis перед Human Review
+
+| Артефакт | Вплив | Дія до погодження |
+| --- | --- | --- |
+| SRS baseline | Додається лише окремий addendum; тексти та ID baseline не змінюються | Human підтверджує нову версію addendum і його номер |
+| OpenAPI | Нових ресурсів, полів відповіді, статусів і endpoint немає | Контракт залишається без змін; після погодження перевірити, що audit event є внутрішнім побічним ефектом |
+| Acceptance criteria / BDD | Два запропоновані AC і один запропонований сценарій наведені в цьому файлі | Після GO перенести їх до контрольованої редакції AC/GWT; до GO не додавати baseline ID |
+| Traceability matrix | Окремий proposed row для `REQ-F-065-B` потрібен лише після погодження | Поточна baseline matrix не змінюється; підготовлена карта впливу нижче |
+| Risks | Підсилює R-07 (витік), R-10 (вигадування), R-16 (формальне погодження); пов'язаний також R-12 | Human визначає власника, строк перегляду та залишковий ризик |
+| Retention/access/rotation | Не визначені baseline і цим addendum | Винесені як окреме рішення; без нього вимога не може мати статус Approved |
+
+### Підготовлена карта простежуваності addendum
+
+`REQ-F-065-B` → `AC-REQ-F-065-B-01`, `AC-REQ-F-065-B-02` → proposed BDD у цьому документі → planned tests `L5-ADD-001`–`L5-ADD-003` → `salon/events.py` та runtime event sink. Стан усіх нових зв'язків: **PROPOSED / NOT EXECUTED**. Не змішувати їх із baseline `docs/lab5/traceability.md` до рішення Human.
+
+### Пакет для Human Review
+
+Рецензенту передати: цей addendum, `spec-addendum-gate.md`, `logs/lab5/spec-addendum-gate/decision.md`, baseline hash із `logs/lab5/final/verification/openapi-static.txt`, [Bookings traceability](bookings-traceability.md), ризики R-07/R-10/R-12/R-16 та відповідь на три рішення: (1) погодити вузький обсяг, (2) погодити AC/BDD і майбутні test IDs, (3) визначити retention/access/rotation. До цього review TDD для REQ-F-065-B **не розпочинається**; наявні safe logging тести перевіряють попередню технічну вимогу, а не нову прийняту поведінку.

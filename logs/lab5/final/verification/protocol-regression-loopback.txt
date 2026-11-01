@@ -1,0 +1,9 @@
+Command: /tmp/beauty-lab5-runtime/bin/python -m pytest tests/lab5 tests/network -q --tb=short
+Execution: repeated with permitted local loopback bind after sandbox EPERM attempt.
+
+.......................................................................s [ 71%]
+..........s..................                                            [100%]
+99 passed, 2 skipped in 29.07s
+Skipped: listSlots success and missing-slot-query, both BLOCKED D-03.
+Exit code: 0
+The preceding sandbox run had 97 passed, 2 skipped, 2 EPERM network failures; it is retained as environment evidence in protocol-regression.txt.

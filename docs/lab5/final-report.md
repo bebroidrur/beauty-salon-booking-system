@@ -39,3 +39,5 @@ PLAN-GATE залишається REVISE. Локальний TEST-GATE для Boo
 Не реалізовано `GET /masters/{masterId}/slots`; не погоджено точну сітку й календарний горизонт D-02/D-03. D-04/D-05/D-06 мають явні guards, а не вигадані результати. SMTP delivery має crash window між зовнішньою доставкою і commit; retry/retention/access policy не погоджені. NF, UI, браузерне приймання, зовнішня доставка і людська validation не закриті. Робочі секрети, БД і virtualenv не комітовано.
 
 Підготовка до майбутнього addendum описана в [spec-addendum-bookings.md](spec-addendum-bookings.md) і [gate](spec-addendum-gate.md). До людського погодження `REQ-F-065-B` не є вимогою продукту.
+
+Матеріали для Word-протоколу з доказами за всіма вісьмома пунктами: [protocol-materials.md](protocol-materials.md). Повторний loopback regression підтвердив 99 passed / 2 skipped; sandbox-спроба з EPERM збережена окремо як середовищний результат.
