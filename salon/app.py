@@ -67,7 +67,7 @@ def create_app(database, clock=None):
 
     for path, methods in API['paths'].items():
         for method, op in methods.items():
-            if op['operationId'] in ('listSlots','listBookings','createBooking','getBooking','updateBooking','cancelBooking'):
+            if op['operationId'] in ('listSlots',):
                 continue
             app.add_url_rule(re.sub(r'{(\w+)}',r'<\1>',path),op['operationId'],handler(op),methods=[method.upper()])
     return app

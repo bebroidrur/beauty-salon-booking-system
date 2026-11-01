@@ -6,6 +6,7 @@ import sqlite3
 import uuid
 from werkzeug.security import check_password_hash, generate_password_hash
 from salon.errors import reject
+from salon.booking_service import Bookings
 
 DAYS = ('monday','tuesday','wednesday','thursday','friday','saturday','sunday')
 
@@ -17,6 +18,7 @@ def ident():
 class Service:
     def __init__(self, store, clock):
         self.store, self.clock = store, clock
+        self.bookings = Bookings(store, clock)
 
     def get(self, db, kind, key):
         value = self.store.get(db, kind, key)
@@ -25,6 +27,8 @@ class Service:
         return value
 
     def execute(self, db, op, data, params, user):
+        if op in ('listBookings','createBooking','getBooking','updateBooking','cancelBooking'):
+            return self.bookings.execute(db,op,data,params,user)
         if op == 'registerClient':
             value = {k:v for k,v in data.items() if k != 'password'} | {'id':ident(), 'role':'client'}
             try:
@@ -59,6 +63,7 @@ class Service:
                 return value
             if op in ('update'+label,'delete'+label):
                 key=params[kind+'Id'];value=self.get(db,kind,key)
+                self.bookings.protect(db,kind,key,op,data)
                 if op.startswith('delete'):
                     db.execute('DELETE FROM entities WHERE kind=? AND id=?',(kind,key))
                     if kind=='master':
@@ -75,6 +80,7 @@ class Service:
             if op=='updateSchedule':
                 value.update(data)
                 self.check_schedule(value)
+                self.bookings.protect_schedule(db,key,value)
                 self.store.put(db,'schedule',value)
             return {k:v for k,v in value.items() if k!='id'}
         reject(404,'NOT_FOUND','Ресурс не знайдено.')
