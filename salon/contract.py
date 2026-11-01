@@ -1,8 +1,7 @@
 """Validation against the unchanged, checked-in OpenAPI contract."""
 from pathlib import Path
-from fractions import Fraction
 from jsonschema import validators
-from jsonschema.exceptions import ValidationError
+from salon.numeric_validation import exact_multiple
 import yaml
 from openapi_schema_validator import OAS30Validator
 
@@ -22,15 +21,6 @@ def resolve(value):
     return value
 
 
-def exact_multiple(validator, divisor, instance, schema):
-    if not validator.is_type(instance, 'number'):
-        return
-    try:
-        valid = (Fraction(str(instance)) / Fraction(str(divisor))).denominator == 1
-    except (ValueError, ZeroDivisionError):
-        valid = False
-    if not valid:
-        yield ValidationError('Number is not an exact decimal multiple')
 
 
 ContractValidator = validators.extend(OAS30Validator, {'multipleOf': exact_multiple})
