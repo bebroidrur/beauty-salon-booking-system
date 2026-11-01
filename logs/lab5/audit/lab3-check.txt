@@ -1,0 +1,11 @@
+Time: 2026-11-01T13:41:53.370091+00:00
+HEAD: fa016c8cc7a18f571f081d0642bb58f932dcde9d
+Command: python3 scripts/check_lab3_scenarios.py
+Exit code: 0
+PASS: six source documents: D/REQ/risk IDs, local links, Markdown tables; 16 risk scores and six Gate passports.
+PASS: B0 reproduces all 45 published AI/Human windows; L=31.75, G=34.75, R=42.5 workdays.
+PASS: S2 Human=224 hours; R=45.5 workdays; end=2026-12-21 13:00 Europe/Kyiv.
+PASS: S2 L=32.25; G=35.5. Forward/backward passes feasible.
+PASS: dependencies acyclic; per-resource slots disjoint; ten Monday G-R5; weekly Human <=40 hours.
+PASS: all generated scenario tables and diagram match model.
+LIMIT: unknown NF work and G-R4 preparation excluded; no Gate or product acceptance performed.

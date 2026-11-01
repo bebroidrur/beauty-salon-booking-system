@@ -1,0 +1,17 @@
+Static stdlib inspection; not OpenAPI schema validation or product tests.
+PASS spec/SRS.md 1ebccf10393b35858579fcb7c0f0c572f96b1b7e4cd9425c16fbc88cbbdb71a6
+PASS spec/scope.md a5df048b8d7fd942f42601f9a3ba07fe06d0e462325018d52e61c31ab6d2f136
+PASS spec/glossary.md dcc92f3de0c348d3c1681c25b9cab8029bdfd7bb43cd896e70bbeb9ffb74d87a
+PASS spec/functional-requirements.md 1bff3bd25cd12a7a0a24e136a0a43da7f24b830ee1d2963115356847d8f9e3b7
+PASS spec/non-functional-requirements.md 83405354418d44cf8e8be7560e6b6e2103a264ca1cfa6502a439ad132f19fcae
+PASS spec/acceptance-criteria.md 6cef87dd500a63394c8c972ef2ece8f3c3bf8ca23b93829b57c9246b83c8a02a
+PASS spec/given-when-then.md c9c571347f2961fe1b44474e7eb9f2b34565c00cb0fd118973d28dcad4140ae1
+PASS spec/traceability-matrix.md c74b72bf1c60453fda1a2fc13b31a8a2024bff70f9909c4fde882af7cbce86e3
+functional-requirements: definitions=64, unique=64, same SRS IDs=True
+non-functional-requirements: definitions=11, unique=11, same SRS IDs=True
+acceptance-criteria: definitions=57, unique=57, same SRS IDs=True
+given-when-then: definitions=35, unique=35, same SRS IDs=True
+functional-requirements: text differences after normalizing heading depth, anchors and internal links=[]
+non-functional-requirements: text differences after normalizing heading depth, anchors and internal links=[]
+acceptance-criteria: text differences after normalizing heading depth, anchors and internal links=[]
+given-when-then: text differences after normalizing heading depth, anchors and internal links=[]

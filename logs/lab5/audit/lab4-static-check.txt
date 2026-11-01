@@ -1,0 +1,8 @@
+Time: 2026-11-01T13:41:53.525672+00:00
+HEAD: fa016c8cc7a18f571f081d0642bb58f932dcde9d
+Command: /tmp/beauty-lab4-venv/bin/python scripts/check_lab4.py
+Exit code: 1
+Traceback (most recent call last):
+  File "/Users/mac/PycharmProjects/beauty-salon-booking-system/scripts/check_lab4.py", line 10, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
