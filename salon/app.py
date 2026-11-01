@@ -1,12 +1,11 @@
 """Flask adapter for the checked-in OpenAPI contract."""
 from datetime import datetime, timezone
 import re
-import json
-import logging
 import uuid
 from flask import Flask, jsonify, request, g
 from jsonschema.exceptions import ValidationError
 from werkzeug.exceptions import HTTPException
+from salon.events import record
 from salon.auth import authenticate
 from salon.contract import API, resolve, validate
 from salon.errors import ApiError, reject
@@ -28,10 +27,7 @@ def create_app(database, clock=None):
 
     @app.after_request
     def record_action(response):
-        event = dict(time=datetime.now(timezone.utc).isoformat(), requestId=g.request_id,
-                     operation=request.endpoint or 'unmatched', status=response.status_code,
-                     code=g.error_code)
-        logging.getLogger('salon.events').info(json.dumps(event))
+        record(request.endpoint or 'unmatched', response.status_code, g.request_id, g.error_code)
         return response
 
     @app.errorhandler(ApiError)
