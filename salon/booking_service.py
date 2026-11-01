@@ -1,20 +1,10 @@
 """Agreed booking invariants. Unresolved specification cases fail explicitly."""
 from datetime import datetime, timedelta, timezone
-from zoneinfo import ZoneInfo
 import json
 import uuid
 from salon.errors import reject
 
-KYIV = ZoneInfo('Europe/Kyiv')
-DAYS = ('monday','tuesday','wednesday','thursday','friday','saturday','sunday')
-
-
-def instant(value):
-    return datetime.fromisoformat(value).astimezone(timezone.utc)
-
-
-def local(value):
-    return value.astimezone(KYIV).isoformat()
+from salon.time_rules import KYIV, DAYS, instant, local
 
 
 def unresolved(decision):

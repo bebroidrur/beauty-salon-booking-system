@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from salon.errors import reject
 from salon.booking_service import Bookings
 
-DAYS = ('monday','tuesday','wednesday','thursday','friday','saturday','sunday')
+from salon.time_rules import DAYS
 
 
 def ident():
