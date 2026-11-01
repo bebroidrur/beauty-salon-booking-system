@@ -12,7 +12,7 @@ if output.exists():
     raise SystemExit(f'Refusing to overwrite evidence: {output}')
 command = sys.argv[2:]
 hashes = {}
-for folder in ('salon', 'tests/lab5', 'spec'):
+for folder in ('salon', 'tests/lab5', 'tests/network', 'spec'):
     for path in sorted((root / folder).rglob('*')):
         if path.is_file() and '__pycache__' not in str(path):
             hashes[str(path.relative_to(root))] = hashlib.sha256(path.read_bytes()).hexdigest()

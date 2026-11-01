@@ -66,3 +66,9 @@ def catalog(env):
                        weekly={day:dict(working=True,interval=dict(start='09:00',end='18:00'))
                                for day in ('monday','tuesday','wednesday','thursday','friday','saturday','sunday')},exceptions=[]))
     return env
+
+
+def pytest_collection_modifyitems(items):
+    for item in items:
+        item.user_properties.append(('requirements',','.join(sorted({rid for marker in item.iter_markers('req') for rid in marker.args}))))
+        item.user_properties.append(('bdd',','.join(sorted({rid for marker in item.iter_markers('bdd') for rid in marker.args}))))
