@@ -24,16 +24,6 @@ class Service:
             reject(404, 'NOT_FOUND', 'Ресурс не знайдено.')
         return value
 
-    def authenticate(self, db, header):
-        parts = header.split()
-        if len(parts) != 2 or parts[0].lower() != 'bearer':
-            reject(401, 'UNAUTHENTICATED', 'Потрібен вхід.')
-        row = db.execute('SELECT u.data FROM sessions s JOIN users u ON s.user_id=u.id WHERE s.token_hash=?',
-                         (hashlib.sha256(parts[1].encode()).hexdigest(),)).fetchone()
-        if not row:
-            reject(401, 'UNAUTHENTICATED', 'Потрібен вхід.')
-        return json.loads(row['data'])
-
     def execute(self, db, op, data, params, user):
         if op == 'registerClient':
             value = {k:v for k,v in data.items() if k != 'password'} | {'id':ident(), 'role':'client'}

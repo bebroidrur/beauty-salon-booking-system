@@ -4,6 +4,7 @@ import re
 from flask import Flask, jsonify, request
 from jsonschema.exceptions import ValidationError
 from werkzeug.exceptions import HTTPException
+from salon.auth import authenticate
 from salon.contract import API, resolve, validate
 from salon.errors import ApiError, reject
 from salon.service import Service
@@ -34,7 +35,7 @@ def create_app(database, clock=None):
             with store.transaction() as db:
                 user = None
                 if operation['security']:
-                    user=service.authenticate(db,request.headers.get('Authorization',''))
+                    user=authenticate(db,request.headers.get('Authorization',''))
                     if user['role'] not in operation['x-roles']:
                         reject(403,'FORBIDDEN','Операція недоступна для цього користувача.')
                 data={}
