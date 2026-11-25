@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="uk" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Інструкція користувача &#8212; Онлайн-запис до салону краси ЛР6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=19172361"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Індекс" href="genindex.html" />
+    <link rel="search" title="Пошук" href="search.html" />
+    <link rel="next" title="HTTP API: фактична реалізація" href="lab4/resource-model.html" />
+    <link rel="prev" title="Інформаційна система онлайн-запису до салону краси" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="user-guide--id1">
+<h1>Інструкція користувача<a class="headerlink" href="#user-guide--id1" title="Link to this heading">¶</a></h1>
+<p>Доступні REST API та адміністративний CLI; сторінок входу, календаря чи
+графічного кабінету немає. Приклади нижче — для локального сервера на порту
+8000 і тестових даних. HTTP-довідник: <a class="reference internal" href="lab4/resource-model.html"><span class="std std-doc">операції</span></a>,
+<a class="reference internal" href="lab4/schemas.html"><span class="std std-doc">поля об’єктів</span></a>, <a class="reference internal" href="lab4/errors.html"><span class="std std-doc">помилки</span></a>.</p>
+<section id="user-guide--id2">
+<h2>Підготовка<a class="headerlink" href="#user-guide--id2" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Установіть залежності й створіть адміністратора командами з README у корені
+репозиторію. Запустіть <code class="docutils literal notranslate"><span class="pre">serve</span></code> з БД <code class="docutils literal notranslate"><span class="pre">runtime/salon.sqlite3</span></code>.</p></li>
+<li><p>В іншому терміналі, теж з кореня репозиторію, задайте адресу:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">BASE_URL</span><span class="o">=</span><span class="s1">'http://127.0.0.1:8000'</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Після кожного запиту перевіряйте HTTP-статус (<code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-i</span></code> показує його).
+Значення в кутових дужках далі замініть даними зі своїх відповідей;
+не надсилайте <code class="docutils literal notranslate"><span class="pre">&lt;service-id&gt;</span></code> або <code class="docutils literal notranslate"><span class="pre">&lt;token&gt;</span></code> буквально.
+Не використовуйте наведений демонстраційний пароль для реальних даних.</p></li>
+</ol>
+</section>
+<section id="user-guide--id3">
+<h2>Клієнт: реєстрація й вхід<a class="headerlink" href="#user-guide--id3" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Зареєструйте тестового клієнта:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/users"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"name":"Тестовий клієнт","phone":"+380000000000","email":"client@example.test","password":"demo-only-password"}'</span>
+</pre></div>
+</div>
+<p>Очікується <strong>201</strong> і User із <code class="docutils literal notranslate"><span class="pre">id</span></code>, профілем та <code class="docutils literal notranslate"><span class="pre">role=client</span></code>, без пароля.
+Збережіть <code class="docutils literal notranslate"><span class="pre">id</span></code>, якщо адміністратор записуватиме вас сам. Повторна реєстрація
+цього email дає <strong>409 EMAIL_IN_USE</strong> — у такому разі перейдіть до входу.</p>
+<ol class="arabic simple" start="2">
+<li><p>Увійдіть:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/sessions"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"email":"client@example.test","password":"demo-only-password"}'</span>
+</pre></div>
+</div>
+<p>Очікується <strong>200</strong> з <code class="docutils literal notranslate"><span class="pre">accessToken</span></code>, <code class="docutils literal notranslate"><span class="pre">tokenType=Bearer</span></code> і <code class="docutils literal notranslate"><span class="pre">user</span></code>. Невірний
+пароль — <strong>401 UNAUTHENTICATED</strong>. Скопіюйте отриманий токен у змінну:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">CLIENT_TOKEN</span><span class="o">=</span><span class="s1">'&lt;accessToken клієнта&gt;'</span>
+</pre></div>
+</div>
+<p>Токен дає доступ до ваших записів; не публікуйте його. Endpoint виходу,
+оновлення токена й відновлення пароля відсутній.</p>
+</section>
+<section id="user-guide--id4">
+<h2>Адміністратор: підготувати каталог і графік<a class="headerlink" href="#user-guide--id4" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Увійдіть через <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/sessions</span></code> із email/паролем, які задали в <code class="docutils literal notranslate"><span class="pre">create-admin</span></code>
+(у запиті попереднього розділу замініть обидва значення).
+Збережіть окремий токен:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">ADMIN_TOKEN</span><span class="o">=</span><span class="s1">'&lt;accessToken адміністратора&gt;'</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Створіть послугу:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/services"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$ADMIN_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"name":"Стрижка","description":"Стрижка волосся","price":500,"durationMinutes":60}'</span>
+</pre></div>
+</div>
+<p>Очікується <strong>201 Service</strong>, <code class="docutils literal notranslate"><span class="pre">active=true</span></code>, <code class="docutils literal notranslate"><span class="pre">currency=UAH</span></code>. Запишіть її <code class="docutils literal notranslate"><span class="pre">id</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">SERVICE_ID</span><span class="o">=</span><span class="s1">'&lt;id послуги&gt;'</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Створіть майстра, який виконує цю послугу:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/masters"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$ADMIN_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"name\":\"Олена\",\"serviceIds\":[\"</span><span class="nv">$SERVICE_ID</span><span class="s2">\"]}"</span>
+</pre></div>
+</div>
+<p>Очікується <strong>201 Master</strong>. Запишіть <code class="docutils literal notranslate"><span class="pre">id</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">MASTER_ID</span><span class="o">=</span><span class="s1">'&lt;id майстра&gt;'</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Новий майстер має неробочий графік. Для навчального прикладу встановіть
+щодня 09:00–18:00 (реальний графік салону задайте відповідно до потреб):</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/masters/</span><span class="nv">$MASTER_ID</span><span class="s2">/schedule"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$ADMIN_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"weekly":{</span>
+<span class="s1">    "monday":{"working":true,"interval":{"start":"09:00","end":"18:00"}},</span>
+<span class="s1">    "tuesday":{"working":true,"interval":{"start":"09:00","end":"18:00"}},</span>
+<span class="s1">    "wednesday":{"working":true,"interval":{"start":"09:00","end":"18:00"}},</span>
+<span class="s1">    "thursday":{"working":true,"interval":{"start":"09:00","end":"18:00"}},</span>
+<span class="s1">    "friday":{"working":true,"interval":{"start":"09:00","end":"18:00"}},</span>
+<span class="s1">    "saturday":{"working":true,"interval":{"start":"09:00","end":"18:00"}},</span>
+<span class="s1">    "sunday":{"working":true,"interval":{"start":"09:00","end":"18:00"}}</span>
+<span class="s1">  },"exceptions":[]}'</span>
+</pre></div>
+</div>
+<p>Очікується <strong>200 Schedule</strong>. Цей запит замінює весь тиждень та очищує
+винятки; не застосовуйте його до чинного графіка без наміру такої заміни.
+Невміщення актуальних записів у новий графік дає <strong>409 SCHEDULE_CONFLICT</strong>.
+Перевірте збережені дані:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/masters/</span><span class="nv">$MASTER_ID</span><span class="s2">/schedule"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$ADMIN_TOKEN</span><span class="s2">"</span>
+</pre></div>
+</div>
+<p>Щоб задати відпустку, PATCH передає <code class="docutils literal notranslate"><span class="pre">exceptions</span></code> із об’єктами
+<code class="docutils literal notranslate"><span class="pre">{&quot;date&quot;:&quot;YYYY-MM-DD&quot;,&quot;kind&quot;:&quot;vacation&quot;,&quot;day&quot;:{&quot;working&quot;:false}}</span></code>;
+весь переданий масив замінює попередній. Повторні дати заборонені.</p>
+</section>
+<section id="user-guide--id5">
+<h2>Клієнт: каталог і створення запису<a class="headerlink" href="#user-guide--id5" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Каталог доступний без входу:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/services"</span>
+curl<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/masters"</span>
+</pre></div>
+</div>
+<p>Очікується <strong>200</strong> з <code class="docutils literal notranslate"><span class="pre">items</span></code>. Якщо масив порожній, каталог ще не налаштований.
+У списках видно і неактивні сутності; для нового запису обидві мають бути
+active=true, а serviceId має входити в serviceIds майстра.</p>
+<ol class="arabic simple" start="2">
+<li><p>Погодьте час із салоном окремо: API доступних слотів ще немає.
+Для щойно створених тестових сутностей із графіком вище можна взяти
+10:00 через два календарні дні. Команда обчислює дату й offset Kyiv,
+тому не залежить від застарілого прикладу дати:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">STARTS_AT</span><span class="o">=</span><span class="k">$(</span>.venv/bin/python<span class="w"> </span>-c<span class="w"> </span><span class="s1">'from datetime import datetime,timedelta; from zoneinfo import ZoneInfo; print((datetime.now(ZoneInfo("Europe/Kyiv"))+timedelta(days=2)).replace(hour=10,minute=0,second=0,microsecond=0).isoformat())'</span><span class="k">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Створіть власний запис, <strong>без clientId</strong>:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/bookings"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$CLIENT_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"serviceId\":\"</span><span class="nv">$SERVICE_ID</span><span class="s2">\",\"masterId\":\"</span><span class="nv">$MASTER_ID</span><span class="s2">\",\"startsAt\":\"</span><span class="nv">$STARTS_AT</span><span class="s2">\"}"</span>
+</pre></div>
+</div>
+<p>Очікується <strong>201 Booking</strong> із <code class="docutils literal notranslate"><span class="pre">status=confirmed</span></code>, <code class="docutils literal notranslate"><span class="pre">category=current</span></code>,
+<code class="docutils literal notranslate"><span class="pre">serviceSnapshot</span></code> і розрахованим <code class="docutils literal notranslate"><span class="pre">endsAt</span></code> (для прикладу — 11:00).
+За конфлікту клієнта/майстра — <strong>409 TIME_UNAVAILABLE</strong>: погодьте інший час.
+За межами графіка або менш ніж за 2 години — <strong>422 BOOKING_RULE_VIOLATION</strong>.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">BOOKING_ID</span><span class="o">=</span><span class="s1">'&lt;id створеного запису&gt;'</span>
+</pre></div>
+</div>
+<p>Адміністратор може створити запис аналогічним POST зі своїм токеном і
+додатковим <code class="docutils literal notranslate"><span class="pre">clientId</span></code> зареєстрованого клієнта. Йому не застосовується мінімум
+2 години; решта перевірок залишається. Пошуку клієнтів за email через API немає.</p>
+</section>
+<section id="user-guide--id6">
+<h2>Клієнт: перегляд і скасування<a class="headerlink" href="#user-guide--id6" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Перегляньте власні актуальні записи та деталі:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/bookings?category=current"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$CLIENT_TOKEN</span><span class="s2">"</span>
+curl<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/bookings/</span><span class="nv">$BOOKING_ID</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$CLIENT_TOKEN</span><span class="s2">"</span>
+</pre></div>
+</div>
+<p>Очікується <strong>200</strong>; чужий запис дає <strong>403 FORBIDDEN</strong>, невідомий ID — <strong>404</strong>.
+Запис залишається актуальним до розрахованого завершення, включно з його початком.</p>
+<ol class="arabic simple" start="2">
+<li><p>Скасуйте не пізніше ніж за 24 години до початку:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/bookings/</span><span class="nv">$BOOKING_ID</span><span class="s2">/cancellation"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$CLIENT_TOKEN</span><span class="s2">"</span>
+</pre></div>
+</div>
+<p>Очікується <strong>200 Booking</strong>, <code class="docutils literal notranslate"><span class="pre">status=cancelled</span></code>, <code class="docutils literal notranslate"><span class="pre">category=history</span></code>; час
+звільнено. За меншого строку — <strong>422 CANCELLATION_TOO_LATE</strong>: зверніться до
+адміністратора поза системою. Повторне скасування — <strong>409 HISTORICAL_BOOKING</strong>.</p>
+<ol class="arabic simple" start="3">
+<li><p>Перегляньте історію:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/bookings?category=history"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$CLIENT_TOKEN</span><span class="s2">"</span>
+</pre></div>
+</div>
+<p>Очікується <strong>200</strong>, запис є в <code class="docutils literal notranslate"><span class="pre">items</span></code>. Історія також містить записи, чий
+розрахований кінець минув; це не підтверджує фактичного виконання послуги.</p>
+</section>
+<section id="user-guide--id7">
+<h2>Адміністратор: зміна запису й керування доступністю<a class="headerlink" href="#user-guide--id7" title="Link to this heading">¶</a></h2>
+<p>Для цього розділу потрібен <strong>інший актуальний</strong> запис: можна повторити
+створення після скасування та оновити BOOKING_ID. Історичний запис змінити не можна.</p>
+<ol class="arabic simple">
+<li><p>Погодьте новий час; у навчальному прикладі — 10:00 через три дні:</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">NEW_STARTS_AT</span><span class="o">=</span><span class="k">$(</span>.venv/bin/python<span class="w"> </span>-c<span class="w"> </span><span class="s1">'from datetime import datetime,timedelta; from zoneinfo import ZoneInfo; print((datetime.now(ZoneInfo("Europe/Kyiv"))+timedelta(days=3)).replace(hour=10,minute=0,second=0,microsecond=0).isoformat())'</span><span class="k">)</span>
+curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/bookings/</span><span class="nv">$BOOKING_ID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$ADMIN_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"startsAt\":\"</span><span class="nv">$NEW_STARTS_AT</span><span class="s2">\"}"</span>
+</pre></div>
+</div>
+<p>Очікується <strong>200</strong> з новими startsAt/endsAt; snapshot послуги зберігається.
+При конфлікті — <strong>409 BOOKING_CHANGE_CONFLICT</strong>, старий запис не змінюється.
+Клієнт із власним токеном не може виконати PATCH (403).
+Заміна послуги через <code class="docutils literal notranslate"><span class="pre">serviceId</span></code> оновлює snapshot; пара з майстром має бути сумісною.</p>
+<ol class="arabic simple" start="2">
+<li><p>Адміністратор скасовує актуальний запис тим самим cancellation-запитом
+зі своїм токеном, зокрема коли залишилося менш ніж 24 години.</p></li>
+<li><p>Для заборони нових записів деактивуйте послугу (аналогічно майстра):</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE_URL</span><span class="s2">/services/</span><span class="nv">$SERVICE_ID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$ADMIN_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"active":false}'</span>
+</pre></div>
+</div>
+<p>Очікується <strong>200</strong>, наявні записи збережені. Фізичний DELETE послуги/майстра
+можливий лише без пов’язаних записів: за актуальних — 409, за історичних
+поточна реалізація повертає guard D-06 (500). Деактивація не є видаленням.</p>
+</section>
+<section id="user-guide--id8">
+<h2>Сповіщення й відомі обмеження<a class="headerlink" href="#user-guide--id8" title="Link to this heading">¶</a></h2>
+<p>Email про створення/зміну/скасування ставиться в чергу, але успішний HTTP
+не засвідчує доставки. Оператор запускає SMTP worker за README. Для прикладу
+через два дні створюється reminder на 24 години до початку; при скасуванні
+він скасовується. Без worker/SMTP листа не буде; failed автоматично не повторюється.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/masters/{masterId}/slots</span></code> повертає 404: вибору вільного часу немає.</p></li>
+<li><p>На 29-й/30-й різниці дат, при деяких перенесеннях без попереднього reminder,
+несумісності чи неактивності при PATCH можливий 500 з D-02–D-06.
+Це незавершені правила, а не підтверджений запис; перевірте поточні дані
+через GET і зверніться до адміністратора. Точні умови — в API-довіднику.</p></li>
+<li><p>Графік має один робочий інтервал на день; UI, SMS, оплати, reset password,
+самостійне перенесення клієнтом і кабінет майстра відсутні.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Онлайн-запис до салону краси</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Вперед" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навігація</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Інструкція користувача</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#user-guide--id2">Підготовка</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-guide--id3">Клієнт: реєстрація й вхід</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-guide--id4">Адміністратор: підготувати каталог і графік</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-guide--id5">Клієнт: каталог і створення запису</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-guide--id6">Клієнт: перегляд і скасування</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-guide--id7">Адміністратор: зміна запису й керування доступністю</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-guide--id8">Сповіщення й відомі обмеження</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lab4/resource-model.html">HTTP API: фактична реалізація</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4/schemas.html">Схеми запитів і відповідей</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4/errors.html">Помилки фактичного HTTP API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API з docstrings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="Попередній розділ">Інформаційна система онлайн-запису до салону краси</a></li>
+      <li>Next: <a href="lab4/resource-model.html" title="наступний розділ">HTTP API: фактична реалізація</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

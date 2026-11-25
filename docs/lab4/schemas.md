@@ -1,6 +1,8 @@
 # Схеми запитів і відповідей
 
-Джерело істини: [openapi.yaml](../../spec/openapi.yaml), components/schemas. У таблиці required — обов’язкові поля; решта дозволених полів є optional. additionalProperties=false на об’єктах обмежує контракт його полями. Порожні PATCH заборонені minProperties=1. Числові обмеження й формат полів — проєктні рішення, див. [адендум](addendum.md).
+Оновлено в ЛР6: ці схеми використовує runtime adapter для перевірки запитів і успішних відповідей. Slot/Availability — лише запроєктовані; details у ApiError фактично не формується.
+
+Джерело контрактних структур: [openapi.yaml](../../spec/openapi.yaml), components/schemas. У таблиці required — обов’язкові поля; решта дозволених полів є optional. additionalProperties=false на об’єктах обмежує контракт його полями. Порожні PATCH заборонені minProperties=1. Числові обмеження й формат полів — проєктні рішення, див. {download}`адендум <addendum.md>`.
 
 | Схема | Поля | Обов’язкові |
 | --- | --- | --- |
@@ -31,12 +33,33 @@
 | BookingList | items: array | items |
 | ApiError | code: string, message: string, details: array | code, message |
 
-Day — oneOf: working=false без interval або working=true з interval. Week має рівно сім іменованих днів. SchedulePatch замінює weekly та/або весь exceptions; винятки мають унікальні дати й переважають тижневий графік. Порядок start < end, відповідність kind/day і конфлікти записів — семантичні умови, не реалізовані JSON Schema чи mock.
+Day — oneOf: working=false без interval або working=true з interval. Week має рівно сім іменованих днів. SchedulePatch замінює weekly та/або весь exceptions; винятки мають унікальні дати й переважають тижневий графік. Порядок start < end, відповідність kind/day і конфлікти записів — семантичні умови, які фактично перевіряють Service.check_schedule і Bookings.protect_schedule; сам mock їх не виконує.
 
 Списки повертають {items: [...]}; порожній список є успішним 200. Пагінацію, сортування й обмеження розміру не вигадано. Slots потребує serviceId та date; bookings потребує category=current/history. Усі path ID — непрозорі непорожні рядки, не ключі БД.
 
 BookingCreate: clientId optional у схемі, але обов’язковий для адміністратора й не дозволений клієнту; така залежність від сесії описана словами. BookingPatch не містить clientId. ServiceSnapshot містить назву, ціну UAH та тривалість на момент створення/заміни послуги. Незалежна зміна каталогу знімок не змінює. endsAt розраховується із зафіксованої тривалості.
 
-Registration приймає name, phone, email, password; password writeOnly та відсутній у User/Session. Role не задається при реєстрації. Bearer — домовленість про транспорт доступу, не обіцянка JWT. Продуктові TLS, життєвий цикл сесій і зберігання паролів не перевірялися.
+Registration приймає name, phone, email, password; password writeOnly та відсутній у User/Session. Role не задається при реєстрації. Bearer — домовленість про транспорт доступу, не обіцянка JWT. Runtime використовує Werkzeug password hash і зберігає SHA-256 токенів; TTL/logout/refresh немає. Продуктовий TLS deployment не реалізовано.
 
 204 не має тіла. Для кожної іншої відповіді задані application/json, схема та приклад. Статичні приклади використовують умовний now=2026-10-20T12:00:00+03:00; вони не стають часовим годинником mock і не адаптуються до дати запуску.
+
+
+## Обмеження полів, що перевіряються runtime
+
+- `name` у Registration/ServiceCreate/ServicePatch/MasterCreate/MasterPatch,
+  `phone`, `password` та ID — непорожні рядки. Email має формат email.
+  Телефон не має національного regex; додаткову парольну політику не введено.
+- `description` послуги — рядок; `price` — число ≥0, кратне 0.01;
+  `durationMinutes` — ціле ≥1. Currency у відповіді — тільки UAH.
+- `serviceIds` — масив унікальних непорожніх рядків, може бути порожнім;
+  Service перевіряє існування послуг. `active` — boolean.
+- `startsAt`/`endsAt` — date-time з offset; `date` — YYYY-MM-DD;
+  робочі `start`/`end` — HH:MM від 00:00 до 23:59.
+- Day: `{"working":false}` або `{"working":true,"interval":{"start":"09:00","end":"18:00"}}`.
+  Для Week потрібні всі сім днів. У ScheduleException kind — vacation,
+  day_off чи changed_hours; перші два вимагають неробочого дня, останній — робочого.
+- `status` запису — confirmed/cancelled; `category` — current/history.
+  ServiceList/MasterList/BookingList мають `items` відповідних об'єктів;
+  поля кожного об'єкта наведено вище. Порожній результат — `{"items":[]}`.
+
+Приклади запуску й послідовності запитів — [інструкція користувача](../user-guide.md).

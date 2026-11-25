@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html lang="uk" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>HTTP API: фактична реалізація &#8212; Онлайн-запис до салону краси ЛР6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=19172361"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Індекс" href="../genindex.html" />
+    <link rel="search" title="Пошук" href="../search.html" />
+    <link rel="next" title="Схеми запитів і відповідей" href="schemas.html" />
+    <link rel="prev" title="Інструкція користувача" href="../user-guide.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="lab4-resource-model--http-api">
+<h1>HTTP API: фактична реалізація<a class="headerlink" href="#lab4-resource-model--http-api" title="Link to this heading">¶</a></h1>
+<p>Оновлено в ЛР6 за <code class="docutils literal notranslate"><span class="pre">salon/app.py</span></code>, <code class="docutils literal notranslate"><span class="pre">salon/service.py</span></code>, <code class="docutils literal notranslate"><span class="pre">salon/booking_service.py</span></code>
+і <code class="docutils literal notranslate"><span class="pre">salon/notifications.py</span></code>. Зареєстровано <strong>17 із 18</strong> контрактних операцій.
+Це реалізований піднабір із відомими обмеженнями, не повна відповідність SRS.
+<a class="reference download internal" download="" href="../_downloads/f9e0edc7f46e275081390fd144eba14e/openapi.yaml"><span class="xref download myst">OpenAPI</span></a> залишено без змін; вихідний проєкт ЛР4
+і його приклади не означають, що кожен сценарій уже підтриманий.</p>
+<p>Локальна адреса: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000</span></code> після запуску <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">salon</span> <span class="pre">serve</span></code>.
+Prism на порту 4010 — окремий mock, а не сервер нижченаведених бізнес-правил.
+Графічного інтерфейсу немає. Є клієнт і адміністратор; майстер — сутність
+каталогу без облікового запису. Немає платежів, філій і кабінету майстра.</p>
+<section id="lab4-resource-model--id1">
+<h2>Спільні правила виклику<a class="headerlink" href="#lab4-resource-model--id1" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>JSON-запити: <code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">application/json</span></code>. Відповіді, крім 204, — JSON.</p></li>
+<li><p>Захищені операції: <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;accessToken&gt;</span></code> із <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/sessions</span></code>.
+Токен непрозорий, не JWT. TTL, logout, refresh і відновлення пароля відсутні.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{serviceId}</span></code>, <code class="docutils literal notranslate"><span class="pre">{masterId}</span></code>, <code class="docutils literal notranslate"><span class="pre">{bookingId}</span></code> — обов’язкові непорожні рядки
+в path, отримані з попередніх відповідей. Самі назви змінних не є ID.</p></li>
+<li><p>Тіла й вкладені об’єкти перевіряються схемою; зайві JSON-поля заборонені.
+PATCH має містити хоча б одне дозволене поле. Передані поля замінюються;
+для графіка замінюється вся передана <code class="docutils literal notranslate"><span class="pre">weekly</span></code> та/або весь <code class="docutils literal notranslate"><span class="pre">exceptions</span></code>.</p></li>
+<li><p>Єдиний query-параметр реалізованих операцій — обов’язковий
+<code class="docutils literal notranslate"><span class="pre">category=current</span></code> або <code class="docutils literal notranslate"><span class="pre">category=history</span></code> у <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/bookings</span></code>.
+Інші операції нижче не мають оголошених query-параметрів; невідомі query
+реалізація не відхиляє, але вони не дають пошуку, пагінації чи фільтрації.</p></li>
+<li><p>Час — RFC3339 з явним offset; збережений показ — <code class="docutils literal notranslate"><span class="pre">Europe/Kyiv</span></code>.</p></li>
+<li><p>Схеми запитів/відповідей і їхні поля наведені в <a class="reference internal" href="schemas.html"><span class="std std-doc">схемах</span></a>.
+У таблиці нижче <code class="docutils literal notranslate"><span class="pre">—</span></code> означає відсутність request body за контрактом.</p></li>
+<li><p>Загальні помилки: 400 <code class="docutils literal notranslate"><span class="pre">INVALID_REQUEST</span></code> для не-JSON/пошкодженого JSON;
+422 <code class="docutils literal notranslate"><span class="pre">VALIDATION_ERROR</span></code> для невідповідності схеми. Для захищених операцій
+401 <code class="docutils literal notranslate"><span class="pre">UNAUTHENTICATED</span></code>, для недостатньої ролі — 403 <code class="docutils literal notranslate"><span class="pre">FORBIDDEN</span></code>.
+Неочікувані збої — 500 <code class="docutils literal notranslate"><span class="pre">INTERNAL_ERROR</span></code>. Повна семантика — <a class="reference internal" href="errors.html"><span class="std std-doc">помилки</span></a>.
+Колонка помилок нижче доповнює ці спільні правила.</p></li>
+</ul>
+</section>
+<section id="lab4-resource-model--id2">
+<h2>Реалізовані операції<a class="headerlink" href="#lab4-resource-model--id2" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Метод і маршрут</p></th>
+<th class="head"><p>operationId / доступ</p></th>
+<th class="head"><p>Запит → успішна відповідь</p></th>
+<th class="head"><p>Спеціальні помилки й обмеження</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>POST <code class="docutils literal notranslate"><span class="pre">/users</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">registerClient</span></code>, без входу</p></td>
+<td><p>Registration → <strong>201 User</strong></p></td>
+<td><p>409 EMAIL_IN_USE. Створює лише client; role у тілі заборонено.</p></td>
+</tr>
+<tr class="row-odd"><td><p>POST <code class="docutils literal notranslate"><span class="pre">/sessions</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">login</span></code>, без входу</p></td>
+<td><p>Login → <strong>200 Session</strong></p></td>
+<td><p>401 UNAUTHENTICATED для неправильного пароля/невідомого email. Не повертає INVALID_CREDENTIALS.</p></td>
+</tr>
+<tr class="row-even"><td><p>GET <code class="docutils literal notranslate"><span class="pre">/services</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">listServices</span></code>, без входу</p></td>
+<td><p>— → <strong>200 ServiceList</strong></p></td>
+<td><p>Повертає також неактивні послуги, без пагінації.</p></td>
+</tr>
+<tr class="row-odd"><td><p>POST <code class="docutils literal notranslate"><span class="pre">/services</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">createService</span></code>, administrator</p></td>
+<td><p>ServiceCreate → <strong>201 Service</strong></p></td>
+<td><p>Сервер задає active=true, currency=UAH та id.</p></td>
+</tr>
+<tr class="row-even"><td><p>PATCH <code class="docutils literal notranslate"><span class="pre">/services/{serviceId}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">updateService</span></code>, administrator</p></td>
+<td><p>ServicePatch → <strong>200 Service</strong></p></td>
+<td><p>404 NOT_FOUND. Зміна каталогу не змінює snapshot наявних записів.</p></td>
+</tr>
+<tr class="row-odd"><td><p>DELETE <code class="docutils literal notranslate"><span class="pre">/services/{serviceId}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">deleteService</span></code>, administrator</p></td>
+<td><p>— → <strong>204</strong>, порожнє тіло</p></td>
+<td><p>404 NOT_FOUND; 409 CURRENT_BOOKINGS_EXIST; за наявності лише історії — guard D-06 (500).</p></td>
+</tr>
+<tr class="row-even"><td><p>GET <code class="docutils literal notranslate"><span class="pre">/masters</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">listMasters</span></code>, без входу</p></td>
+<td><p>— → <strong>200 MasterList</strong></p></td>
+<td><p>Повертає також неактивних майстрів, без пагінації.</p></td>
+</tr>
+<tr class="row-odd"><td><p>POST <code class="docutils literal notranslate"><span class="pre">/masters</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">createMaster</span></code>, administrator</p></td>
+<td><p>MasterCreate → <strong>201 Master</strong></p></td>
+<td><p>422 VALIDATION_ERROR для невідомого serviceIds. Порожній список дозволено. Початковий графік: усі дні неробочі.</p></td>
+</tr>
+<tr class="row-even"><td><p>PATCH <code class="docutils literal notranslate"><span class="pre">/masters/{masterId}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">updateMaster</span></code>, administrator</p></td>
+<td><p>MasterPatch → <strong>200 Master</strong></p></td>
+<td><p>404 NOT_FOUND; 422 VALIDATION_ERROR для невідомої послуги; 409 CURRENT_BOOKINGS_CONFLICT при вилученні послуги актуального запису.</p></td>
+</tr>
+<tr class="row-odd"><td><p>DELETE <code class="docutils literal notranslate"><span class="pre">/masters/{masterId}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">deleteMaster</span></code>, administrator</p></td>
+<td><p>— → <strong>204</strong>, порожнє тіло</p></td>
+<td><p>404 NOT_FOUND; 409 CURRENT_BOOKINGS_EXIST; історія — guard D-06. За успіху видаляється також графік.</p></td>
+</tr>
+<tr class="row-even"><td><p>GET <code class="docutils literal notranslate"><span class="pre">/masters/{masterId}/schedule</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getSchedule</span></code>, administrator</p></td>
+<td><p>— → <strong>200 Schedule</strong></p></td>
+<td><p>404 NOT_FOUND. Клієнту графік цим маршрутом недоступний.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PATCH <code class="docutils literal notranslate"><span class="pre">/masters/{masterId}/schedule</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">updateSchedule</span></code>, administrator</p></td>
+<td><p>SchedulePatch → <strong>200 Schedule</strong></p></td>
+<td><p>404 NOT_FOUND; 422 VALIDATION_ERROR для повторних дат, kind/day чи start ≥ end; 409 SCHEDULE_CONFLICT, якщо графік виключає актуальний запис.</p></td>
+</tr>
+<tr class="row-even"><td><p>GET <code class="docutils literal notranslate"><span class="pre">/bookings?category=current</span></code> або <code class="docutils literal notranslate"><span class="pre">history</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">listBookings</span></code>, client/administrator</p></td>
+<td><p>— → <strong>200 BookingList</strong></p></td>
+<td><p>Відсутня/невірна category → 422 VALIDATION_ERROR. Клієнт бачить лише власні, адміністратор — всі записи вибраної категорії.</p></td>
+</tr>
+<tr class="row-odd"><td><p>POST <code class="docutils literal notranslate"><span class="pre">/bookings</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">createBooking</span></code>, client/administrator</p></td>
+<td><p>BookingCreate → <strong>201 Booking</strong></p></td>
+<td><p>422 VALIDATION_ERROR для clientId не за роллю; 404 NOT_FOUND для невідомої послуги/майстра; 422 BOOKING_RULE_VIOLATION для неактивності, несумісності, строку &lt;2 год для клієнта, невміщення в графік чи горизонту &gt;30 дат; 409 TIME_UNAVAILABLE для перетину; D-02/D-03 нижче.</p></td>
+</tr>
+<tr class="row-even"><td><p>GET <code class="docutils literal notranslate"><span class="pre">/bookings/{bookingId}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getBooking</span></code>, client/administrator</p></td>
+<td><p>— → <strong>200 Booking</strong></p></td>
+<td><p>404 NOT_FOUND; 403 FORBIDDEN для чужого запису клієнта.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PATCH <code class="docutils literal notranslate"><span class="pre">/bookings/{bookingId}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">updateBooking</span></code>, administrator</p></td>
+<td><p>BookingPatch → <strong>200 Booking</strong></p></td>
+<td><p>404 NOT_FOUND; 409 BOOKING_CHANGE_CONFLICT для історичного запису, графіка чи перетину; 422 BOOKING_RULE_VIOLATION за горизонтом &gt;30; D-02–D-06 нижче.</p></td>
+</tr>
+<tr class="row-even"><td><p>POST <code class="docutils literal notranslate"><span class="pre">/bookings/{bookingId}/cancellation</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cancelBooking</span></code>, client/administrator</p></td>
+<td><p>— → <strong>200 Booking</strong></p></td>
+<td><p>404 NOT_FOUND; 403 FORBIDDEN для чужого запису; 409 HISTORICAL_BOOKING; 422 CANCELLATION_TOO_LATE для клієнта менш ніж за 24 год. Адміністратор може скасувати актуальний запис без цієї часової межі.</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/bookings</span></code> від клієнта <strong>не містить clientId</strong>. Адміністратор зобов’язаний
+передати ID зареєстрованого клієнта; endpoint пошуку клієнтів відсутній.
+Успішне створення одразу дає <code class="docutils literal notranslate"><span class="pre">status=confirmed</span></code>; <code class="docutils literal notranslate"><span class="pre">serviceSnapshot</span></code> фіксує
+назву, ціну, валюту й тривалість. <code class="docutils literal notranslate"><span class="pre">endsAt</span></code> обчислюється з цієї тривалості.
+Заміна послуги адміністратором оновлює snapshot; сама зміна часу/майстра — ні.</p>
+<p><code class="docutils literal notranslate"><span class="pre">category=history</span></code>, якщо status=cancelled або endsAt ≤ поточний час;
+інакше <code class="docutils literal notranslate"><span class="pre">current</span></code>, включно з процесом надання послуги. Це не облік явки.
+Історичний запис незмінний. Скасування зберігає його, звільняє час,
+скасовує pending/failed нагадування. Суміжні інтервали не конфліктують;
+перетин перевіряється для майстра та клієнта в транзакції SQLite.</p>
+<p>Email створюється в outbox у тій самій транзакції. API-відповідь не означає
+доставки листа: потрібен окремий налаштований worker. Нагадування створюється
+за 24 години до початку, якщо до початку залишилося ≥24 год. Після зміни
+надсилається changed, після скасування — cancelled. Доставка не має
+автоматичного retry; можливий дубль при збої після SMTP і до commit.</p>
+</section>
+<section id="lab4-resource-model--id3">
+<h2>Запроєктовано, але не реалізовано<a class="headerlink" href="#lab4-resource-model--id3" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Метод і маршрут</p></th>
+<th class="head"><p>Контракт</p></th>
+<th class="head"><p>Фактичний результат</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GET <code class="docutils literal notranslate"><span class="pre">/masters/{masterId}/slots?serviceId=…&amp;date=YYYY-MM-DD</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">listSlots</span></code>, public; path masterId, query serviceId/date обов’язкові; 200 Availability з масивом Slot</p></td>
+<td><p>Маршрут не зареєстрований: <strong>404 INVALID_REQUEST</strong>, без обчислення слотів. D-03 відкритий.</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Slot</span></code> та <code class="docutils literal notranslate"><span class="pre">Availability</span></code> у <a class="reference internal" href="schemas.html"><span class="std std-doc">схемах</span></a> описують лише проєкт.
+Не можна показувати клієнту календар доступних слотів на підставі цього API.
+Час доводиться погоджувати окремо; остаточна перевірка відбувається при записі.</p>
+</section>
+<section id="lab4-resource-model--id4">
+<h2>Відомі межі реалізації<a class="headerlink" href="#lab4-resource-model--id4" title="Link to this heading">¶</a></h2>
+<p>Ці guards повертають <strong>500 INTERNAL_ERROR</strong> із повідомленням про D-рішення
+та rollback; це тимчасові обмеження ЛР5, не затверджені правила продукту:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Рішення</p></th>
+<th class="head"><p>Реальна умова</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>D-02</p></td>
+<td><p>При create/update різниця календарних дат у Kyiv дорівнює 29 або 30. Значення &gt;30 дає 422. Внутрішні дати перевіряються іншими правилами.</p></td>
+</tr>
+<tr class="row-odd"><td><p>D-03</p></td>
+<td><p>При create/update початок ≤ now, якщо виконання дійшло до guard. Клієнтський create може раніше повернути 422 через правило 2 годин. Сітка 30 хв у коді не перевіряється; її прив’язка не погоджена.</p></td>
+</tr>
+<tr class="row-even"><td><p>D-04</p></td>
+<td><p>Перенесення на ≥24 год від now, якщо для запису ніколи не було reminder у таблиці mail. Перенесення відкочується.</p></td>
+</tr>
+<tr class="row-odd"><td><p>D-05</p></td>
+<td><p>PATCH запису з послугою, якої немає в serviceIds майстра. При create це 422 BOOKING_RULE_VIOLATION.</p></td>
+</tr>
+<tr class="row-even"><td><p>D-06</p></td>
+<td><p>PATCH запису з неактивною послугою/майстром; фізичне видалення сутності, яка має історичні записи (за актуальних спочатку 409).</p></td>
+</tr>
+</tbody>
+</table>
+<p>Відоме розходження з OpenAPI: <code class="docutils literal notranslate"><span class="pre">createBooking</span></code> може повернути 404 NOT_FOUND
+для відсутньої послуги/майстра, хоча 404 для цієї операції не оголошено.
+Поточний довідник фіксує поведінку, не виправляє контракт чи сервер.
+Наявність ширшого списку responses у OpenAPI не доводить досяжність кожного
+коду в реалізації (наприклад, login не має гілки 409).</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Онлайн-запис до салону краси</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Вперед" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навігація</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user-guide.html">Інструкція користувача</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HTTP API: фактична реалізація</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lab4-resource-model--id1">Спільні правила виклику</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lab4-resource-model--id2">Реалізовані операції</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lab4-resource-model--id3">Запроєктовано, але не реалізовано</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lab4-resource-model--id4">Відомі межі реалізації</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="schemas.html">Схеми запитів і відповідей</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Помилки фактичного HTTP API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python-api.html">Python API з docstrings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../user-guide.html" title="Попередній розділ">Інструкція користувача</a></li>
+      <li>Next: <a href="schemas.html" title="наступний розділ">Схеми запитів і відповідей</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
