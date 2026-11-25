@@ -52,7 +52,9 @@ Prism на порту 4010 — окремий mock, а не сервер ниж�
 Токен непрозорий, не JWT. TTL, logout, refresh і відновлення пароля відсутні.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">{serviceId}</span></code>, <code class="docutils literal notranslate"><span class="pre">{masterId}</span></code>, <code class="docutils literal notranslate"><span class="pre">{bookingId}</span></code> — обов’язкові непорожні рядки
 в path, отримані з попередніх відповідей. Самі назви змінних не є ID.</p></li>
-<li><p>Тіла й вкладені об’єкти перевіряються схемою; зайві JSON-поля заборонені.
+<li><p>Для операцій з <code class="docutils literal notranslate"><span class="pre">requestBody</span></code> тіла й вкладені об’єкти перевіряються схемою;
+зайві JSON-поля заборонені. Операції без <code class="docutils literal notranslate"><span class="pre">requestBody</span></code>, зокрема cancellation,
+фактично ігнорують передане тіло; воно не валідується й не змінює дію.
 PATCH має містити хоча б одне дозволене поле. Передані поля замінюються;
 для графіка замінюється вся передана <code class="docutils literal notranslate"><span class="pre">weekly</span></code> та/або весь <code class="docutils literal notranslate"><span class="pre">exceptions</span></code>.</p></li>
 <li><p>Єдиний query-параметр реалізованих операцій — обов’язковий

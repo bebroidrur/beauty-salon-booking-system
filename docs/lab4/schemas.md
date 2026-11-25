@@ -2,7 +2,7 @@
 
 Оновлено в ЛР6: ці схеми використовує runtime adapter для перевірки запитів і успішних відповідей. Slot/Availability — лише запроєктовані; details у ApiError фактично не формується.
 
-Джерело контрактних структур: [openapi.yaml](../../spec/openapi.yaml), components/schemas. У таблиці required — обов’язкові поля; решта дозволених полів є optional. additionalProperties=false на об’єктах обмежує контракт його полями. Порожні PATCH заборонені minProperties=1. Числові обмеження й формат полів — проєктні рішення, див. {download}`адендум <addendum.md>`.
+Джерело контрактних структур: [openapi.yaml](../../spec/openapi.yaml), components/schemas. У таблиці required — обов’язкові поля; решта дозволених полів є optional. additionalProperties=false на об’єктах обмежує контракт його полями. Runtime застосовує перевірку тіла лише там, де операція має requestBody; для cancellation та інших операцій без тіла додатковий body ігнорується. Порожні PATCH заборонені minProperties=1. Числові обмеження й формат полів — проєктні рішення, див. {download}`адендум <addendum.md>`.
 
 | Схема | Поля | Обов’язкові |
 | --- | --- | --- |

@@ -289,7 +289,9 @@ Prism на порту 4010 — окремий mock, а не сервер ниж�
 Токен непрозорий, не JWT. TTL, logout, refresh і відновлення пароля відсутні.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">{serviceId}</span></code>, <code class="docutils literal notranslate"><span class="pre">{masterId}</span></code>, <code class="docutils literal notranslate"><span class="pre">{bookingId}</span></code> — обов’язкові непорожні рядки
 в path, отримані з попередніх відповідей. Самі назви змінних не є ID.</p></li>
-<li><p>Тіла й вкладені об’єкти перевіряються схемою; зайві JSON-поля заборонені.
+<li><p>Для операцій з <code class="docutils literal notranslate"><span class="pre">requestBody</span></code> тіла й вкладені об’єкти перевіряються схемою;
+зайві JSON-поля заборонені. Операції без <code class="docutils literal notranslate"><span class="pre">requestBody</span></code>, зокрема cancellation,
+фактично ігнорують передане тіло; воно не валідується й не змінює дію.
 PATCH має містити хоча б одне дозволене поле. Передані поля замінюються;
 для графіка замінюється вся передана <code class="docutils literal notranslate"><span class="pre">weekly</span></code> та/або весь <code class="docutils literal notranslate"><span class="pre">exceptions</span></code>.</p></li>
 <li><p>Єдиний query-параметр реалізованих операцій — обов’язковий
@@ -478,7 +480,7 @@ PATCH має містити хоча б одне дозволене поле. П
 <span id="document-lab4/schemas"></span><section id="lab4-schemas--id1">
 <h2>Схеми запитів і відповідей<a class="headerlink" href="#lab4-schemas--id1" title="Link to this heading">¶</a></h2>
 <p>Оновлено в ЛР6: ці схеми використовує runtime adapter для перевірки запитів і успішних відповідей. Slot/Availability — лише запроєктовані; details у ApiError фактично не формується.</p>
-<p>Джерело контрактних структур: <a class="reference download internal" download="" href="_downloads/f9e0edc7f46e275081390fd144eba14e/openapi.yaml"><span class="xref download myst">openapi.yaml</span></a>, components/schemas. У таблиці required — обов’язкові поля; решта дозволених полів є optional. additionalProperties=false на об’єктах обмежує контракт його полями. Порожні PATCH заборонені minProperties=1. Числові обмеження й формат полів — проєктні рішення, див. <a class="reference download internal" download="" href="_downloads/47099699a381c4c0d8ee6bc521220d26/addendum.md"><code class="xref download docutils literal notranslate"><span class="pre">адендум</span></code></a>.</p>
+<p>Джерело контрактних структур: <a class="reference download internal" download="" href="_downloads/f9e0edc7f46e275081390fd144eba14e/openapi.yaml"><span class="xref download myst">openapi.yaml</span></a>, components/schemas. У таблиці required — обов’язкові поля; решта дозволених полів є optional. additionalProperties=false на об’єктах обмежує контракт його полями. Runtime застосовує перевірку тіла лише там, де операція має requestBody; для cancellation та інших операцій без тіла додатковий body ігнорується. Порожні PATCH заборонені minProperties=1. Числові обмеження й формат полів — проєктні рішення, див. <a class="reference download internal" download="" href="_downloads/47099699a381c4c0d8ee6bc521220d26/addendum.md"><code class="xref download docutils literal notranslate"><span class="pre">адендум</span></code></a>.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Схема</p></th>
