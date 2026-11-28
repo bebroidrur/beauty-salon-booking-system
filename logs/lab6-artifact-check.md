@@ -13,6 +13,6 @@
 | 7 | Documentation verification | `logs/lab6-documentation-verification.md` | PRESENT |
 | 8 | Traceability matrix | `docs/lab6/traceability-matrix.md` | PRESENT; 75 requirements |
 | 9 | Traceability audit and final verification | `logs/lab6-traceability-audit.md`, `logs/lab6-final-verification.md` | PRESENT |
-| 10 | Human validation and FINAL-GATE | `docs/lab6-human-validation.md`, `docs/final-gate.md`, `logs/lab6-sdd-summary.md` | PRESENT; REVISE recorded |
+| 10 | Human validation and FINAL-GATE | `docs/lab6-human-validation.md`, `docs/final-gate.md`, `logs/lab6-sdd-summary.md` | PRESENT; GO scoped / REVISE full SRS recorded |
 
 Окремі матеріали подання: [submission/README.md](../submission/README.md), [documentation tags](../docs/documentation-tags.md), [HTML](../docs/generated/html/index.html), [singlehtml](../docs/generated/singlehtml/index.html) і [source archive](../submission/lab6-source.tar.gz). Архів не містить Git, virtualenv, runtime data, секретів, кешів, залежностей або згенерованої документації.

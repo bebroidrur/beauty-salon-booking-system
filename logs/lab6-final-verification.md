@@ -32,4 +32,4 @@
 3. Прийняти обсяг і докази нефункціональних вимог: benchmark, recovery, TLS, UI/browser/accessibility та availability.
 4. Окремо прийняти політику SMTP delivery/retry/crash window і потребу зовнішнього mail-provider тесту.
 
-FINAL-GATE за студента не приймався; цей файл фіксує докази й відкриті рішення для людського review.
+На момент складання цього verification log FINAL-GATE ще очікував Human review. Після підтвердження 2026-11-28 рішення зафіксовано як **GO для погодженого скороченого API-модуля / REVISE для повної SRS** у [docs/final-gate.md](../docs/final-gate.md). Наведені технічні результати не змінювалися.
